@@ -1,6 +1,9 @@
 library common;
 
+// Components
+export 'components/appBar.dart';
+export 'components/button.dart';
+
 // Consts
-export 'consts/appColors.dart';
 export 'consts/appFonts.dart';
 export 'consts/appResponsive.dart';

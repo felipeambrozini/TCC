@@ -16,9 +16,8 @@ dependencies:
   cupertino_icons: ^0.1.3
 
 #Modules:
-  
-
-
+  common:
+    path: "../common"
 
 dev_dependencies:
   flutter_test:
@@ -29,9 +28,6 @@ flutter:
   assets:
     - assets/images/
   fonts:
-    - family: AppIcons
-      fonts:
-        - asset: assets/icons/AppIcons.ttf
     - family: ProximaNova
       fonts:
         - asset: assets/fonts/proxima-nova.otf

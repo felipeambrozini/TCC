@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "470011224601",
+    "firebase_url": "https://batman-apps.firebaseio.com",
+    "project_id": "batman-apps",
+    "storage_bucket": "batman-apps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470011224601:android:050d77d0407ac8cd5f4088",
+        "android_client_info": {
+          "package_name": "com.felipe.batpedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470011224601-j43funppobu51s7m55s46k43jqejgomi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4FbkW8ag85jWhxccMt0stiuF29i6uvk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470011224601-j43funppobu51s7m55s46k43jqejgomi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -28,7 +28,7 @@ class AppFonts {
   static TextStyle createTitle(
           {String fontFamily = FONT_FAMILY,
           double fontSize,
-          Color color = AppColors.black,
+          Color color = Colors.yellow,
           double height: TITLE_HEIGHT,
           FontWeight fontWeight: FontWeight.bold,
           double letterSpacing: LETTERSPACING,
@@ -46,7 +46,7 @@ class AppFonts {
   static TextStyle createParagraph(
           {String fontFamily = FONT_FAMILY,
           double fontSize,
-          Color color = AppColors.black,
+          Color color = Colors.yellow,
           double height: PARAGRAPH_HEIGHT,
           FontWeight fontWeight: FontWeight.w400,
           double letterSpacing: LETTERSPACING,
@@ -64,7 +64,7 @@ class AppFonts {
   static TextStyle createButton(
           {String fontFamily = FONT_FAMILY,
           double fontSize,
-          Color color = AppColors.black,
+          Color color = Colors.yellow,
           double height: BUTTON_HEIGHT,
           FontWeight fontWeight: FontWeight.w400,
           double letterSpacing: LETTERSPACING,

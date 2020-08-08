@@ -1,4 +1,4 @@
-package com.example.main
+package com.felipe.batpedia
 
 import io.flutter.embedding.android.FlutterActivity
 
