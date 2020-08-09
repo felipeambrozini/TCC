@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:common/common.dart';
+import 'package:login/login.dart';
 
 class WelcomePage extends StatefulWidget {
   static const String tag = '/main/welcome';
@@ -33,7 +34,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     topLeft: Radius.circular(_responsive.getWidth(20.0)),
                     topRight: Radius.circular(_responsive.getWidth(20.0)),
                   )),
-              child: Container());
+              child: LoginPage());
         });
   }
 
@@ -76,7 +77,8 @@ class _WelcomePageState extends State<WelcomePage> {
             style: AppFonts.createTitle(),
           ),
           Padding(
-            padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
+            padding:
+                EdgeInsets.symmetric(vertical: _responsive.getHeight(128.0)),
             child: Image.asset("assets/images/batmanLogo.png"),
           ),
         ],
@@ -87,7 +89,6 @@ class _WelcomePageState extends State<WelcomePage> {
   Widget buildWelcomeMensage() {
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: _responsive.getHeight(16.0),
         horizontal: _responsive.getWidth(16.0),
       ),
       child: Column(
@@ -116,17 +117,16 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget buildButtons() => Padding(
-        padding: EdgeInsets.only(
-          bottom: _responsive.getHeight(37.0),
-          right: _responsive.getWidth(10.0),
-          left: _responsive.getWidth(10.0),
+        padding: EdgeInsets.symmetric(
+          vertical: _responsive.getHeight(32.0),
+          horizontal: _responsive.getWidth(16.0),
         ),
         child: Row(
           children: <Widget>[
             Expanded(
               child: BatButton(
                 onPressed: buildLoginBottomSheet,
-                text: 'Já sou noodle',
+                text: 'Login',
                 color: Colors.yellow,
               ),
             ),
@@ -138,7 +138,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     _isLoading = true;
                   });
                 },
-                text: 'Quero ser noodle',
+                text: 'Cadastro',
               ),
             ),
           ],
