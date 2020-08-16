@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:login/login.dart';
+import 'package:account/account.dart';
 import 'pages/splashScreen.dart';
 import 'pages/welcomePage.dart';
 
@@ -39,6 +40,9 @@ class BatPedia extends StatelessWidget {
         home: SplashScreen(),
         routes: {
           WelcomePage.tag: (context) => WelcomePage(),
+          LoginPage.tag: (context) => LoginPage(),
+          RegisterPage.tag: (context) => RegisterPage(),
+          HomePage.tag:(context) => HomePage(),
         },
       ),
     );

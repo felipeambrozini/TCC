@@ -1,4 +1,8 @@
 library login;
 
+//Pages
 export 'pages/loginPage.dart';
-export 'services/loginService.dart';
+export 'pages/RegisterPage.dart';
+
+//Services
+export 'services/auth.dart';

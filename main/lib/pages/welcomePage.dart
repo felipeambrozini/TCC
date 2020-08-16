@@ -11,7 +11,6 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   AppResponsive _responsive;
-  bool _isLoading = false;
 
   @override
   void initState() {
@@ -20,7 +19,7 @@ class _WelcomePageState extends State<WelcomePage> {
     _responsive = AppResponsive();
   }
 
-  buildLoginBottomSheet() {
+  buildBottomSheet(BottomSheetType type) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -34,34 +33,24 @@ class _WelcomePageState extends State<WelcomePage> {
                     topLeft: Radius.circular(_responsive.getWidth(20.0)),
                     topRight: Radius.circular(_responsive.getWidth(20.0)),
                   )),
-              child: LoginPage());
+              child: type == BottomSheetType.LOGIN
+                  ? LoginPage()
+                  : RegisterPage());
         });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BatAppBar(blackFont: false, color: Colors.transparent),
+      appBar: BatAppBar(blackFont: true, color: Colors.yellow),
       backgroundColor: Colors.black,
-      body: Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Center(child: buildLogo()),
-              buildWelcomeMensage(),
-              Expanded(child: Container()),
-              buildButtons(),
-            ],
-          ),
-          _isLoading
-              ? Container(
-                  color: Colors.grey.withOpacity(0.3),
-                  child: Center(
-                      child: CircularProgressIndicator(
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.green))))
-              : Container()
+          Center(child: buildLogo()),
+          buildWelcomeMensage(),
+          Expanded(child: Container()),
+          buildButtons(),
         ],
       ),
     );
@@ -96,19 +85,14 @@ class _WelcomePageState extends State<WelcomePage> {
         children: <Widget>[
           Text(
             "Bem-vindo ao BatPedia",
-            style: AppFonts.createParagraph(
-              fontSize: _responsive.getWidth(24.0),
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppFonts.createTitle(),
             textAlign: TextAlign.left,
           ),
           Padding(
             padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
             child: Text(
               "A enciclopédia digital do Batman, onde você vai encontrar as principais informações do universo do Batman.",
-              style: AppFonts.createParagraph(
-                fontSize: AppFonts.p1,
-              ),
+              style: AppFonts.createTitle(fontWeight: FontWeight.normal),
             ),
           ),
         ],
@@ -125,23 +109,23 @@ class _WelcomePageState extends State<WelcomePage> {
           children: <Widget>[
             Expanded(
               child: BatButton(
-                onPressed: buildLoginBottomSheet,
+                onPressed: () {
+                  buildBottomSheet(BottomSheetType.LOGIN);
+                },
                 text: 'Login',
-                color: Colors.yellow,
               ),
             ),
             Expanded(
               child: BatButton(
-                color: Colors.yellow,
-                onPressed: () async {
-                  setState(() {
-                    _isLoading = true;
-                  });
-                },
                 text: 'Cadastro',
+                onPressed: () {
+                  buildBottomSheet(BottomSheetType.REGISTER);
+                },
               ),
             ),
           ],
         ),
       );
 }
+
+enum BottomSheetType { LOGIN, REGISTER }

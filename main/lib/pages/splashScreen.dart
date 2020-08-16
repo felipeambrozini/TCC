@@ -45,10 +45,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget buildLogo() {
-    return Center(
-      child: Image.asset(
-        "assets/images/batmanLogo.png",
-      ),
-    );
+    return Center(child: Image.asset("assets/images/batmanLogo.png"));
   }
 }

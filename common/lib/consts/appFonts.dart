@@ -48,12 +48,12 @@ class AppFonts {
           double fontSize,
           Color color = Colors.yellow,
           double height: PARAGRAPH_HEIGHT,
-          FontWeight fontWeight: FontWeight.w400,
+          FontWeight fontWeight: FontWeight.normal,
           double letterSpacing: LETTERSPACING,
           TextDecoration decoration: TextDecoration.none}) =>
       TextStyle(
         fontFamily: fontFamily,
-        fontSize: fontSize ?? p2,
+        fontSize: fontSize ?? h2,
         color: color,
         height: height,
         fontWeight: fontWeight,
@@ -66,7 +66,7 @@ class AppFonts {
           double fontSize,
           Color color = Colors.yellow,
           double height: BUTTON_HEIGHT,
-          FontWeight fontWeight: FontWeight.w400,
+          FontWeight fontWeight: FontWeight.bold,
           double letterSpacing: LETTERSPACING,
           TextDecoration decoration: TextDecoration.none}) =>
       TextStyle(

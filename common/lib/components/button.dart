@@ -1,37 +1,46 @@
-import 'package:flutter/material.dart';
 import 'package:common/common.dart';
+import 'package:flutter/material.dart';
 
-class BatButton extends StatelessWidget {
+class BatButton extends StatefulWidget {
   final String text;
-  final Color color;
   final VoidCallback onPressed;
   final bool isRounded;
 
-  BatButton(
-      {@required this.text,
-      @required this.onPressed,
-      this.isRounded,
-      @required this.color});
+  const BatButton(
+      {Key key, @required this.text, @required this.onPressed, this.isRounded})
+      : super(key: key);
+
+  @override
+  _BatButtonState createState() => _BatButtonState();
+}
+
+class _BatButtonState extends State<BatButton> {
+  AppResponsive _responsive;
+
+  @override
+  void initState() {
+    super.initState();
+    _responsive = AppResponsive();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: _responsive.getWidth(16.0)),
       child: FlatButton(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
-                isRounded == null || !isRounded ? 15.0 : 30.0)),
+                widget.isRounded == null || !widget.isRounded ? 15.0 : 30.0)),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         colorBrightness: Brightness.dark,
-        color: color,
+        color: Colors.yellow,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Text(text,
+          padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(20.0)),
+          child: Text(widget.text,
               textAlign: TextAlign.center,
-              style: AppFonts.createButton(
-                  fontWeight: FontWeight.bold, color: Colors.black)),
+              style: AppFonts.createButton(color: Colors.black)),
         ),
-        onPressed: onPressed,
+        onPressed: widget.onPressed,
       ),
     );
   }
