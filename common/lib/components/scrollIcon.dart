@@ -7,12 +7,12 @@ class ScrollIcon extends StatefulWidget {
 }
 
 class _ScrollIconState extends State<ScrollIcon> {
-  AppResponsive _responsive;
+  BatResponsive _responsive;
 
   @override
   void initState() {
     super.initState();
-    _responsive = AppResponsive();
+    _responsive = BatResponsive();
   }
 
   @override

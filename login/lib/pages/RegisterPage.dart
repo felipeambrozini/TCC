@@ -12,7 +12,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  AppResponsive _responsive;
+  BatResponsive _responsive;
   RegisterStep _registerStep;
   TextEditingController nameController;
   TextEditingController emailController;
@@ -22,7 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    _responsive = AppResponsive();
+    _responsive = BatResponsive();
     _registerStep = RegisterStep.WELCOME;
     nameController = TextEditingController();
     emailController = TextEditingController();
@@ -53,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
           children: <Widget>[
             Text(
               'Cadastro',
-              style: AppFonts.createTitle(),
+              style: BatFonts.createTitle(),
             ),
             GestureDetector(
               onTap: () => Navigator.pop(context),
@@ -100,8 +100,8 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
           Text(
-            "Para realizar o cadastro no BatPedia vamos precisar do seu nome, e-mail e você deve criar uma senha de 6 dígitos",
-            style: AppFonts.createParagraph(),
+            "Para realizar o cadastro no BatPédia vamos precisar do seu nome, e-mail e você deve criar uma senha de 6 dígitos",
+            style: BatFonts.createParagraph(),
           ),
           Center(child: buildStarRegisterButton())
         ],
@@ -133,20 +133,21 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildInputData(
-              Icons.person, "Digite seu nome", "Nome: ", nameController),
+          buildInputData(Icons.person, "Digite seu nome", "Nome: ",
+              nameController, TextInputType.name),
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: _responsive.getHeight(16.0)),
-            child: buildInputData(
-                Icons.mail, "Digite seu e-mail", "Email: ", emailController),
+            child: buildInputData(Icons.mail, "Digite seu e-mail", "Email: ",
+                emailController, TextInputType.emailAddress),
           ),
           buildInputPassword(
-              Icons.lock,
-              _obscureText ? Icons.visibility_off : Icons.visibility,
-              "Digite seu senha",
-              "Senha: ",
-              passwordController),
+            Icons.lock,
+            _obscureText ? Icons.visibility_off : Icons.visibility,
+            "Digite seu senha",
+            "Senha: ",
+            passwordController,
+          ),
           buildRegisterButton()
         ],
       ),
@@ -154,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget buildInputData(IconData icon, String hintText, String prefixText,
-      TextEditingController controller) {
+      TextEditingController controller, TextInputType keyboardType) {
     return Row(
       children: [
         Icon(
@@ -165,17 +166,18 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
             prefixText,
-            style: AppFonts.createParagraph(),
+            style: BatFonts.createTitle(),
           ),
         ),
         Flexible(
           child: TextField(
             controller: controller,
-            style: AppFonts.createParagraph(),
+            keyboardType: keyboardType,
+            style: BatFonts.createParagraph(),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,
-              hintStyle: AppFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(),
             ),
           ),
         ),
@@ -183,8 +185,13 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget buildInputPassword(IconData prefixicon, IconData sufixicon,
-      String hintText, String prefixText, TextEditingController controller) {
+  Widget buildInputPassword(
+    IconData prefixicon,
+    IconData sufixicon,
+    String hintText,
+    String prefixText,
+    TextEditingController controller,
+  ) {
     return Row(
       children: [
         Icon(
@@ -195,17 +202,17 @@ class _RegisterPageState extends State<RegisterPage> {
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
             prefixText,
-            style: AppFonts.createParagraph(),
+            style: BatFonts.createTitle(),
           ),
         ),
         Flexible(
           child: TextField(
-            style: AppFonts.createParagraph(),
+            style: BatFonts.createParagraph(),
             controller: controller,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,
-              hintStyle: AppFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(),
             ),
             obscureText: _obscureText,
           ),
@@ -246,6 +253,7 @@ class _RegisterPageState extends State<RegisterPage> {
         .catchError((error) {
       Flushbar(
         title: 'Erro',
+        backgroundColor: Colors.yellow,
         message: error.toString(),
         duration: Duration(seconds: 3),
       )..show(context);
@@ -275,11 +283,11 @@ class _RegisterPageState extends State<RegisterPage> {
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: _responsive.getHeight(64.0)),
-            child: Image.asset("assets/images/batFamily.jpg"),
+            child: Image.asset("assets/images/batFamily.png"),
           ),
           Text(
             "Cadastro realizado com sucesso. \nBem-vindo ao BatPédia!",
-            style: AppFonts.createParagraph(fontWeight: FontWeight.bold),
+            style: BatFonts.createParagraph(fontWeight: FontWeight.bold),
           ),
           buildReturnButton()
         ],

@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    AppResponsive responsive = AppResponsive();
+    BatResponsive responsive = BatResponsive();
     responsive.setWidth(MediaQuery.of(context).size.width);
     double totalHeight = MediaQuery.of(context).size.height;
     double statusBarSize = MediaQuery.of(context).padding.top;

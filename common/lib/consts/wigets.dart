@@ -3,7 +3,7 @@ import 'package:common/common.dart';
 
 class BatWidgets {
   static BatWidgets _instance;
-  AppResponsive _responsive;
+  BatResponsive _responsive;
 
   factory BatWidgets() {
     _instance ??= BatWidgets._internal();
@@ -11,7 +11,7 @@ class BatWidgets {
   }
 
   BatWidgets._internal() {
-    _responsive = AppResponsive();
+    _responsive = BatResponsive();
   }
 
   Widget snackBar({
@@ -23,7 +23,7 @@ class BatWidgets {
         padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(7.0)),
         child: Text(
           label,
-          style: AppFonts.createParagraph(color: Colors.black),
+          style: BatFonts.createParagraph(color: Colors.black),
         ),
       ),
       duration: Duration(seconds: 2),
@@ -57,7 +57,7 @@ class BatWidgets {
                 children: <Widget>[
                   Text(
                     label,
-                    style: AppFonts.createParagraph(
+                    style: BatFonts.createParagraph(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       height: 1.2,
@@ -87,7 +87,7 @@ class BatWidgets {
                   children: <Widget>[
                     Text(
                       label,
-                      style: AppFonts.createParagraph(
+                      style: BatFonts.createParagraph(
                         color: Colors.yellow,
                         fontWeight: FontWeight.bold,
                         height: 1.2,

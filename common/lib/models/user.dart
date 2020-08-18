@@ -28,5 +28,3 @@ class User {
         "email": email == null ? null : email,
       };
 }
-
-

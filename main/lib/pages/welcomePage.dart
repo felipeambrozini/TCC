@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:common/common.dart';
 import 'package:login/login.dart';
 
@@ -10,13 +9,12 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  AppResponsive _responsive;
+  BatResponsive _responsive;
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    _responsive = AppResponsive();
+    _responsive = BatResponsive();
   }
 
   buildBottomSheet(BottomSheetType type) {
@@ -33,9 +31,8 @@ class _WelcomePageState extends State<WelcomePage> {
                     topLeft: Radius.circular(_responsive.getWidth(20.0)),
                     topRight: Radius.circular(_responsive.getWidth(20.0)),
                   )),
-              child: type == BottomSheetType.LOGIN
-                  ? LoginPage()
-                  : RegisterPage());
+              child:
+                  type == BottomSheetType.LOGIN ? LoginPage() : RegisterPage());
         });
   }
 
@@ -63,7 +60,7 @@ class _WelcomePageState extends State<WelcomePage> {
         children: [
           Text(
             "BatPedia",
-            style: AppFonts.createTitle(),
+            style: BatFonts.createTitle(),
           ),
           Padding(
             padding:
@@ -84,15 +81,15 @@ class _WelcomePageState extends State<WelcomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "Bem-vindo ao BatPedia",
-            style: AppFonts.createTitle(),
+            "Bem-vindo ao BatPédia",
+            style: BatFonts.createTitle(),
             textAlign: TextAlign.left,
           ),
           Padding(
             padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
             child: Text(
               "A enciclopédia digital do Batman, onde você vai encontrar as principais informações do universo do Batman.",
-              style: AppFonts.createTitle(fontWeight: FontWeight.normal),
+              style: BatFonts.createTitle(fontWeight: FontWeight.normal),
             ),
           ),
         ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:common/common.dart';
 
-class AppFonts {
-  AppFonts();
+class BatFonts {
+  BatFonts();
 
   static const String FONT_FAMILY = 'ProximaNova';
   static const double TITLE_HEIGHT = 1.0;
@@ -11,9 +11,9 @@ class AppFonts {
   static const double LETTERSPACING = 0.0;
 
   //Title
-  static double h1 = 20.0;
-  static double h2 = 18.0;
-  static double h3 = 16.0;
+  static double t1 = 20.0;
+  static double t2 = 18.0;
+  static double t3 = 16.0;
 
   //Paragraph
   static double p1 = 16.0;
@@ -35,7 +35,7 @@ class AppFonts {
           TextDecoration decoration: TextDecoration.none}) =>
       TextStyle(
         fontFamily: fontFamily,
-        fontSize: fontSize ?? h1,
+        fontSize: fontSize ?? t1,
         color: color,
         height: height,
         fontWeight: fontWeight,
@@ -48,12 +48,12 @@ class AppFonts {
           double fontSize,
           Color color = Colors.yellow,
           double height: PARAGRAPH_HEIGHT,
-          FontWeight fontWeight: FontWeight.normal,
+          FontWeight fontWeight: FontWeight.w500,
           double letterSpacing: LETTERSPACING,
           TextDecoration decoration: TextDecoration.none}) =>
       TextStyle(
         fontFamily: fontFamily,
-        fontSize: fontSize ?? h2,
+        fontSize: fontSize ?? t2,
         color: color,
         height: height,
         fontWeight: fontWeight,
@@ -80,11 +80,11 @@ class AppFonts {
       );
 
   static void setResponsive() {
-    AppResponsive responsive = AppResponsive();
+    BatResponsive responsive = BatResponsive();
 
-    h1 = responsive.getWidth(h1);
-    h2 = responsive.getWidth(h2);
-    h3 = responsive.getWidth(h3);
+    t1 = responsive.getWidth(t1);
+    t2 = responsive.getWidth(t2);
+    t3 = responsive.getWidth(t3);
 
     p1 = responsive.getWidth(p1);
     p2 = responsive.getWidth(p2);

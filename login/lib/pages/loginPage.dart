@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  AppResponsive _responsive;
+  BatResponsive _responsive;
   TextEditingController emailController;
   TextEditingController passwordController;
   bool _obscureText;
@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _responsive = AppResponsive();
+    _responsive = BatResponsive();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     _obscureText = true;
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Text(
             'Login',
-            style: AppFonts.createTitle(),
+            style: BatFonts.createTitle(),
           ),
           GestureDetector(
             onTap: () => Navigator.pop(context),
@@ -107,18 +107,18 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
             prefixText,
-            style: AppFonts.createParagraph(),
+            style: BatFonts.createParagraph(),
           ),
         ),
         Flexible(
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             controller: controller,
-            style: AppFonts.createParagraph(),
+            style: BatFonts.createParagraph(),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,
-              hintStyle: AppFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(),
             ),
           ),
         ),
@@ -138,17 +138,17 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
             prefixText,
-            style: AppFonts.createParagraph(),
+            style: BatFonts.createTitle(),
           ),
         ),
         Flexible(
           child: TextField(
-            style: AppFonts.createParagraph(),
+            style: BatFonts.createParagraph(),
             controller: controller,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hintText,
-              hintStyle: AppFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(),
             ),
             obscureText: _obscureText,
           ),
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildLoginButton() {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: _responsive.getHeight(160.0)),
+      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(160.0)),
       child: Row(
         children: [
           Expanded(
@@ -181,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-   Future<void> _signIn() async {
+  Future<void> _signIn() async {
     final email = emailController.text;
     final password = passwordController.text;
     await Auth.signIn(email, password)
@@ -191,6 +191,11 @@ class _LoginPageState extends State<LoginPage> {
       Flushbar(
         title: 'Erro',
         message: error.toString(),
+        backgroundColor: Colors.yellow,
+        titleText: Text(
+          'Erro',
+          style: BatFonts.createTitle(color: Colors.black),
+        ),
         duration: Duration(seconds: 3),
       )..show(context);
     });

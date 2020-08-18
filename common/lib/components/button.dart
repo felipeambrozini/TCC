@@ -15,12 +15,12 @@ class BatButton extends StatefulWidget {
 }
 
 class _BatButtonState extends State<BatButton> {
-  AppResponsive _responsive;
+  BatResponsive _responsive;
 
   @override
   void initState() {
     super.initState();
-    _responsive = AppResponsive();
+    _responsive = BatResponsive();
   }
 
   @override
@@ -38,7 +38,7 @@ class _BatButtonState extends State<BatButton> {
           padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(20.0)),
           child: Text(widget.text,
               textAlign: TextAlign.center,
-              style: AppFonts.createButton(color: Colors.black)),
+              style: BatFonts.createButton(color: Colors.black)),
         ),
         onPressed: widget.onPressed,
       ),
