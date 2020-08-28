@@ -79,7 +79,7 @@ class _BatmanPageState extends State<BatmanPage> {
         backgroundColor: Colors.transparent,
         builder: (context) {
           return Container(
-              margin: EdgeInsets.only(top: _responsive.getHeight(64.0)),
+              margin: EdgeInsets.only(top: _responsive.getHeight(128.0)),
               decoration: BoxDecoration(
                   color: Colors.yellow,
                   borderRadius: BorderRadius.only(
@@ -89,12 +89,16 @@ class _BatmanPageState extends State<BatmanPage> {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: _responsive.getWidth(16.0)),
-                child: Padding(
-                  padding: EdgeInsets.only(top: _responsive.getHeight(128.0)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ScrollIcon(
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: _responsive.getHeight(128.0)),
+                      child: Row(
                         children: [
                           Text(
                             "Nome: ",
@@ -107,66 +111,89 @@ class _BatmanPageState extends State<BatmanPage> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Alter ego: ",
-                              style: BatFonts.createTitle(color: Colors.black),
-                            ),
-                            Text(
-                              data["alterEgo"],
-                              style:
-                                  BatFonts.createParagraph(color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                      child: Row(
                         children: [
                           Text(
-                            "Primeira aparição: ",
+                            "Alter ego: ",
+                            style: BatFonts.createTitle(color: Colors.black),
+                          ),
+                          Text(
+                            data["alterEgo"],
+                            style:
+                                BatFonts.createParagraph(color: Colors.black),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Criadores: ",
                             style: BatFonts.createTitle(color: Colors.black),
                           ),
                           Expanded(
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  top: _responsive.getHeight(25.0)),
+                                  top: _responsive.getHeight(5.0)),
                               child: Text(
-                                data["firstAparation"],
+                                data["creator"],
                                 style: BatFonts.createParagraph(
                                     color: Colors.black),
                                 textAlign: TextAlign.justify,
-                                maxLines: 5,
                               ),
                             ),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Biografia: ",
-                              style: BatFonts.createTitle(color: Colors.black),
-                            ),
-                            Expanded(
-                              child: Text(
-                                data["biography"],
-                                style: BatFonts.createParagraph(
-                                    color: Colors.black),
-                                textAlign: TextAlign.justify,
-                              ),
-                            ),
-                          ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Primeira aparição: ",
+                          style: BatFonts.createTitle(color: Colors.black),
                         ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: _responsive.getHeight(28.0)),
+                            child: Text(
+                              data["firstAparation"],
+                              style:
+                                  BatFonts.createParagraph(color: Colors.black),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Biografia: ",
+                            style: BatFonts.createTitle(color: Colors.black),
+                          ),
+                          Expanded(
+                            child: Text(
+                              data["biography"],
+                              style:
+                                  BatFonts.createParagraph(color: Colors.black),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ));
         });

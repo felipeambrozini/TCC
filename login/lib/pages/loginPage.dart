@@ -13,17 +13,27 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   BatResponsive _responsive;
+  BatValidations _validations;
   TextEditingController emailController;
   TextEditingController passwordController;
+  FocusNode emailFocusNode;
+  FocusNode passwordFocusNode;
   bool _obscureText;
+  bool _erroMsgE;
+  bool _erroMsgP;
 
   @override
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+    _validations = BatValidations();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
     _obscureText = true;
+    _erroMsgE = false;
+    _erroMsgP = false;
   }
 
   @override
@@ -40,7 +50,13 @@ class _LoginPageState extends State<LoginPage> {
         horizontal: _responsive.getWidth(16.0),
       ),
       child: Column(
-        children: [ScrollIcon(), buildTop(), buildBody()],
+        children: [
+          ScrollIcon(
+            color: Colors.yellow,
+          ),
+          buildTop(),
+          buildBody()
+        ],
       ),
     );
   }
@@ -79,15 +95,14 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Padding(
               padding: EdgeInsets.only(top: _responsive.getHeight(64.0)),
-              child: buildInputData(
-                  Icons.mail, "Digite seu e-mail", "Email: ", emailController),
+              child: buildInputEmail(),
             ),
-            buildInputPassword(
-                Icons.lock,
-                _obscureText ? Icons.visibility_off : Icons.visibility,
-                "Digite seu senha",
-                "Senha: ",
-                passwordController),
+            _erroMsgE ? buildErrorMessage("E-mail inválido") : Container(),
+            Padding(
+              padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
+              child: buildInputPassword(),
+            ),
+            _erroMsgP ? buildErrorMessage("Senha inválido") : Container(),
             buildLoginButton(),
           ],
         ),
@@ -95,67 +110,94 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget buildInputData(IconData icon, String hintText, String prefixText,
-      TextEditingController controller) {
+  Widget buildInputEmail() {
     return Row(
       children: [
         Icon(
-          icon,
+          Icons.mail,
           color: Colors.yellow,
         ),
         Padding(
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
-            prefixText,
-            style: BatFonts.createParagraph(),
+            "Email: ",
+            style: BatFonts.createTitle(),
           ),
         ),
         Flexible(
           child: TextField(
+            autofocus: true,
+            cursorColor: Colors.yellow,
             keyboardType: TextInputType.emailAddress,
-            controller: controller,
+            controller: emailController,
             style: BatFonts.createParagraph(),
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: hintText,
+              hintText: "Digite seu e-mail",
               hintStyle: BatFonts.createParagraph(),
             ),
+            focusNode: emailFocusNode,
+            onEditingComplete: () {
+              _validations.validateEmail(emailController.text)
+                  ? FocusScope.of(context).requestFocus(passwordFocusNode)
+                  : setState(() {
+                      _erroMsgE = true;
+                    });
+            },
+            onChanged: (text) {
+              setState(() {
+                _erroMsgE = false;
+              });
+            },
           ),
         ),
       ],
     );
   }
 
-  Widget buildInputPassword(IconData prefixicon, IconData sufixicon,
-      String hintText, String prefixText, TextEditingController controller) {
+  Widget buildInputPassword() {
     return Row(
       children: [
         Icon(
-          prefixicon,
+          Icons.lock,
           color: Colors.yellow,
         ),
         Padding(
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
-            prefixText,
+            "Senha: ",
             style: BatFonts.createTitle(),
           ),
         ),
         Flexible(
           child: TextField(
+            cursorColor: Colors.yellow,
             style: BatFonts.createParagraph(),
-            controller: controller,
+            controller: passwordController,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: hintText,
+              hintText: "Digite seu senha",
               hintStyle: BatFonts.createParagraph(),
             ),
             obscureText: _obscureText,
+            focusNode: passwordFocusNode,
+            onEditingComplete: () {
+              _validations.validatePassword(passwordController.text)
+                  ? FocusScope.of(context).unfocus()
+                  : setState(() {
+                      _erroMsgP = true;
+                    });
+            },
+            onChanged: (text) {
+              setState(() {
+                _erroMsgP = false;
+              });
+            },
           ),
         ),
         IconButton(
           icon: Icon(
-            sufixicon,
+            _obscureText ? Icons.visibility_off : Icons.visibility,
             color: Colors.yellow,
           ),
           onPressed: () {
@@ -167,6 +209,16 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
+
+  Widget buildErrorMessage(String errorMsg) => Padding(
+        padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(16.0)),
+        child: Text(
+          errorMsg,
+          style: BatFonts.createParagraph(
+            color: Colors.red,
+          ),
+        ),
+      );
 
   Widget buildLoginButton() {
     return Padding(
@@ -187,15 +239,16 @@ class _LoginPageState extends State<LoginPage> {
     await Auth.signIn(email, password)
         .then(_onSignInSuccess)
         .catchError((error) {
-      print('Caught error: $error');
       Flushbar(
-        title: 'Erro',
-        message: error.toString(),
-        backgroundColor: Colors.yellow,
         titleText: Text(
           'Erro',
           style: BatFonts.createTitle(color: Colors.black),
         ),
+        messageText: Text(
+          error.toString(),
+          style: BatFonts.createParagraph(color: Colors.black),
+        ),
+        backgroundColor: Colors.yellow,
         duration: Duration(seconds: 3),
       )..show(context);
     });

@@ -13,21 +13,35 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   BatResponsive _responsive;
+  BatValidations _validations;
   RegisterStep _registerStep;
   TextEditingController nameController;
   TextEditingController emailController;
   TextEditingController passwordController;
+  FocusNode nameFocusNode;
+  FocusNode emailFocusNode;
+  FocusNode passwordFocusNode;
   bool _obscureText;
+  bool _erroMsgN;
+  bool _erroMsgE;
+  bool _erroMsgP;
 
   @override
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+    _validations = BatValidations();
     _registerStep = RegisterStep.WELCOME;
     nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    nameFocusNode = FocusNode();
+    emailFocusNode = FocusNode();
+    passwordFocusNode = FocusNode();
     _obscureText = true;
+    _erroMsgN = false;
+    _erroMsgE = false;
+    _erroMsgP = false;
   }
 
   @override
@@ -40,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget buildRegisterPage() {
     return Column(
-      children: [ScrollIcon(), buildTop(), buildBody()],
+      children: [ScrollIcon(color: Colors.yellow), buildTop(), buildBody()],
     );
   }
 
@@ -133,93 +147,152 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildInputData(Icons.person, "Digite seu nome", "Nome: ",
-              nameController, TextInputType.name),
+          buildInputName(),
+          _erroMsgN ? buildErrorMessage("Nome inválido") : Container(),
           Padding(
-            padding:
-                EdgeInsets.symmetric(vertical: _responsive.getHeight(16.0)),
-            child: buildInputData(Icons.mail, "Digite seu e-mail", "Email: ",
-                emailController, TextInputType.emailAddress),
-          ),
-          buildInputPassword(
-            Icons.lock,
-            _obscureText ? Icons.visibility_off : Icons.visibility,
-            "Digite seu senha",
-            "Senha: ",
-            passwordController,
-          ),
+              padding:
+                  EdgeInsets.symmetric(vertical: _responsive.getHeight(16.0)),
+              child: buildInputEmail()),
+          _erroMsgE ? buildErrorMessage("E-mail inválido") : Container(),
+          buildInputPassword(),
+          _erroMsgP ? buildErrorMessage("Senha inválida") : Container(),
           buildRegisterButton()
         ],
       ),
     );
   }
 
-  Widget buildInputData(IconData icon, String hintText, String prefixText,
-      TextEditingController controller, TextInputType keyboardType) {
+  Widget buildInputName() {
     return Row(
       children: [
         Icon(
-          icon,
+          Icons.person,
           color: Colors.yellow,
         ),
         Padding(
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
-            prefixText,
+            "Nome: ",
             style: BatFonts.createTitle(),
           ),
         ),
         Flexible(
           child: TextField(
-            controller: controller,
-            keyboardType: keyboardType,
+            cursorColor: Colors.yellow,
+            controller: nameController,
+            keyboardType: TextInputType.name,
             style: BatFonts.createParagraph(),
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: hintText,
+              hintText: "Digite seu nome",
               hintStyle: BatFonts.createParagraph(),
             ),
+            focusNode: nameFocusNode,
+            onEditingComplete: () {
+              _validations.validateName(nameController.text)
+                  ? FocusScope.of(context).requestFocus(emailFocusNode)
+                  : setState(() {
+                      _erroMsgN = true;
+                    });
+            },
+            onChanged: (text) {
+              setState(() {
+                _erroMsgN = false;
+              });
+            },
           ),
         ),
       ],
     );
   }
 
-  Widget buildInputPassword(
-    IconData prefixicon,
-    IconData sufixicon,
-    String hintText,
-    String prefixText,
-    TextEditingController controller,
-  ) {
+  Widget buildInputEmail() {
     return Row(
       children: [
         Icon(
-          prefixicon,
+          Icons.mail,
           color: Colors.yellow,
         ),
         Padding(
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
-            prefixText,
+            "Email: ",
             style: BatFonts.createTitle(),
           ),
         ),
         Flexible(
           child: TextField(
+            cursorColor: Colors.yellow,
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
             style: BatFonts.createParagraph(),
-            controller: controller,
             decoration: InputDecoration(
               border: InputBorder.none,
-              hintText: hintText,
+              hintText: "Digite seu e-mail",
+              hintStyle: BatFonts.createParagraph(),
+            ),
+            focusNode: emailFocusNode,
+            onEditingComplete: () {
+              _validations.validateEmail(emailController.text)
+                  ? FocusScope.of(context).requestFocus(passwordFocusNode)
+                  : setState(() {
+                      _erroMsgE = true;
+                    });
+            },
+            onChanged: (text) {
+              setState(() {
+                _erroMsgE = false;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildInputPassword() {
+    return Row(
+      children: [
+        Icon(
+          Icons.lock,
+          color: Colors.yellow,
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
+          child: Text(
+            "Senha: ",
+            style: BatFonts.createTitle(),
+          ),
+        ),
+        Flexible(
+          child: TextField(
+            cursorColor: Colors.yellow,
+            style: BatFonts.createParagraph(),
+            controller: passwordController,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: "Digite seu senha",
               hintStyle: BatFonts.createParagraph(),
             ),
             obscureText: _obscureText,
+            focusNode: passwordFocusNode,
+            onEditingComplete: () {
+              _validations.validatePassword(passwordController.text)
+                  ? FocusScope.of(context).unfocus()
+                  : setState(() {
+                      _erroMsgP = true;
+                    });
+            },
+            onChanged: (text) {
+              setState(() {
+                _erroMsgP = false;
+              });
+            },
           ),
         ),
         IconButton(
           icon: Icon(
-            sufixicon,
+            _obscureText ? Icons.visibility_off : Icons.visibility,
             color: Colors.yellow,
           ),
           onPressed: () {
@@ -245,6 +318,16 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
+  Widget buildErrorMessage(String errorMsg) => Padding(
+        padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(16.0)),
+        child: Text(
+          errorMsg,
+          style: BatFonts.createParagraph(
+            color: Colors.red,
+          ),
+        ),
+      );
+
   Future _signUp() async {
     final email = emailController.text;
     final password = passwordController.text;
@@ -252,9 +335,15 @@ class _RegisterPageState extends State<RegisterPage> {
         .then(_onResultSignUpSuccess)
         .catchError((error) {
       Flushbar(
-        title: 'Erro',
+        titleText: Text(
+          'Erro',
+          style: BatFonts.createTitle(color: Colors.black),
+        ),
+        messageText: Text(
+          error.toString(),
+          style: BatFonts.createParagraph(color: Colors.black),
+        ),
         backgroundColor: Colors.yellow,
-        message: error.toString(),
         duration: Duration(seconds: 3),
       )..show(context);
     });
@@ -283,11 +372,11 @@ class _RegisterPageState extends State<RegisterPage> {
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: _responsive.getHeight(64.0)),
-            child: Image.asset("assets/images/batFamily.png"),
+            child: Image.asset("assets/images/batFamily.jpg"),
           ),
           Text(
             "Cadastro realizado com sucesso. \nBem-vindo ao BatPédia!",
-            style: BatFonts.createParagraph(fontWeight: FontWeight.bold),
+            style: BatFonts.createTitle(),
           ),
           buildReturnButton()
         ],

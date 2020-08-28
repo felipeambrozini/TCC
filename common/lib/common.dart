@@ -3,7 +3,7 @@ library common;
 // Components
 export 'components/appBar.dart';
 export 'components/button.dart';
-
+export 'components/informationBox.dart';
 export 'components/menuBox.dart';
 export 'components/scrollIcon.dart';
 

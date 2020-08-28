@@ -44,6 +44,8 @@ class BatPedia extends StatelessWidget {
           RegisterPage.tag: (context) => RegisterPage(),
           HomePage.tag: (context) => HomePage(),
           BatmanPage.tag: (context) => BatmanPage(),
+          AliesPage.tag: (context) => AliesPage(),
+          VillainsPage.tag: (context) => VillainsPage(),
         },
       ),
     );

@@ -57,9 +57,8 @@ class BatWidgets {
                 children: <Widget>[
                   Text(
                     label,
-                    style: BatFonts.createParagraph(
+                    style: BatFonts.createTitle(
                       color: Colors.black,
-                      fontWeight: FontWeight.bold,
                       height: 1.2,
                     ),
                   ),
@@ -87,9 +86,8 @@ class BatWidgets {
                   children: <Widget>[
                     Text(
                       label,
-                      style: BatFonts.createParagraph(
+                      style: BatFonts.createTitle(
                         color: Colors.yellow,
-                        fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:common/common.dart';
+import 'package:flutter/services.dart';
 import 'package:login/login.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -15,6 +16,7 @@ class _WelcomePageState extends State<WelcomePage> {
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
 
   buildBottomSheet(BottomSheetType type) {
@@ -89,7 +91,7 @@ class _WelcomePageState extends State<WelcomePage> {
             padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
             child: Text(
               "A enciclopédia digital do Batman, onde você vai encontrar as principais informações do universo do Batman.",
-              style: BatFonts.createTitle(fontWeight: FontWeight.normal),
+              style: BatFonts.createParagraph(fontSize: BatFonts.t1),
             ),
           ),
         ],

@@ -5,6 +5,7 @@ class BatFonts {
   BatFonts();
 
   static const String FONT_FAMILY = 'ProximaNova';
+  static const String FONT_FAMILY_BOLD = 'ProximaNovaBold';
   static const double TITLE_HEIGHT = 1.0;
   static const double PARAGRAPH_HEIGHT = 1.0;
   static const double BUTTON_HEIGHT = 1.0;
@@ -26,11 +27,10 @@ class BatFonts {
   static double b3 = 12.0;
 
   static TextStyle createTitle(
-          {String fontFamily = FONT_FAMILY,
+          {String fontFamily = FONT_FAMILY_BOLD,
           double fontSize,
           Color color = Colors.yellow,
           double height: TITLE_HEIGHT,
-          FontWeight fontWeight: FontWeight.bold,
           double letterSpacing: LETTERSPACING,
           TextDecoration decoration: TextDecoration.none}) =>
       TextStyle(
@@ -38,7 +38,6 @@ class BatFonts {
         fontSize: fontSize ?? t1,
         color: color,
         height: height,
-        fontWeight: fontWeight,
         letterSpacing: letterSpacing,
         decoration: decoration,
       );
@@ -48,7 +47,6 @@ class BatFonts {
           double fontSize,
           Color color = Colors.yellow,
           double height: PARAGRAPH_HEIGHT,
-          FontWeight fontWeight: FontWeight.w500,
           double letterSpacing: LETTERSPACING,
           TextDecoration decoration: TextDecoration.none}) =>
       TextStyle(
@@ -56,25 +54,6 @@ class BatFonts {
         fontSize: fontSize ?? t2,
         color: color,
         height: height,
-        fontWeight: fontWeight,
-        letterSpacing: letterSpacing,
-        decoration: decoration,
-      );
-
-  static TextStyle createButton(
-          {String fontFamily = FONT_FAMILY,
-          double fontSize,
-          Color color = Colors.yellow,
-          double height: BUTTON_HEIGHT,
-          FontWeight fontWeight: FontWeight.bold,
-          double letterSpacing: LETTERSPACING,
-          TextDecoration decoration: TextDecoration.none}) =>
-      TextStyle(
-        fontFamily: fontFamily,
-        fontSize: fontSize ?? b1,
-        color: color,
-        height: height,
-        fontWeight: fontWeight,
         letterSpacing: letterSpacing,
         decoration: decoration,
       );

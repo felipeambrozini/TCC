@@ -2,6 +2,9 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 class ScrollIcon extends StatefulWidget {
+  final Color color;
+
+  const ScrollIcon({Key key, @required this.color}) : super(key: key);
   @override
   _ScrollIconState createState() => _ScrollIconState();
 }
@@ -19,9 +22,9 @@ class _ScrollIconState extends State<ScrollIcon> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        margin: EdgeInsets.only(top: _responsive.getHeight(18.5)),
+        margin: EdgeInsets.symmetric(vertical: _responsive.getHeight(16.0)),
         decoration: BoxDecoration(
-            color: Colors.yellow,
+            color: widget.color,
             borderRadius: BorderRadius.all(
               Radius.circular(2.0),
             )),
