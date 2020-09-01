@@ -67,58 +67,60 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, BatmanPage.tag);
+                        Navigator.pushNamed(context, CharactersPage.tag);
                       },
                       child: Column(
                         children: [
-                          MenuBox(asset: "assets/images/batman.png"),
+                          MenuBox(asset: "assets/images/characters.jpg"),
                           Padding(
                             padding: EdgeInsets.only(
                                 top: _responsive.getHeight(16.0)),
                             child: Text(
-                              "Batman",
+                              "Personagens",
                               style: BatFonts.createTitle(),
                             ),
                           )
                         ],
                       )),
                   Expanded(child: Container()),
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, AliesPage.tag);
-                      },
-                      child: Column(
-                        children: [
-                          MenuBox(asset: "assets/images/batFamily.png"),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
-                            child: Text(
-                              "Aliados",
-                              style: BatFonts.createTitle(),
-                            ),
-                          )
-                        ],
-                      )),
+                  Column(
+                    children: [
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, HQsPage.tag);
+                          },
+                          child: MenuBox(asset: "assets/images/hqs.png")),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                        child: Text(
+                          "HQs",
+                          style: BatFonts.createTitle(),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
               Padding(
-                padding:
-                    EdgeInsets.symmetric(vertical: _responsive.getHeight(32.0)),
+                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
                     Column(
                       children: [
                         GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, VillainsPage.tag);
-                            },
-                            child: MenuBox(asset: "assets/images/vilians.png")),
+                          onTap: () {
+                            Navigator.pushNamed(context, MoviesPage.tag);
+                          },
+                          child: MenuBox(
+                            asset: "assets/images/movies.png",
+                          ),
+                        ),
                         Padding(
                           padding:
                               EdgeInsets.only(top: _responsive.getHeight(16.0)),
                           child: Text(
-                            "Vilões",
+                            "Filmes",
                             style: BatFonts.createTitle(),
                           ),
                         )
@@ -127,12 +129,17 @@ class _HomePageState extends State<HomePage> {
                     Expanded(child: Container()),
                     Column(
                       children: [
-                        MenuBox(asset: "assets/images/hqs.png"),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, TVSeriesPage.tag);
+                            },
+                            child:
+                                MenuBox(asset: "assets/images/animations.png")),
                         Padding(
                           padding:
                               EdgeInsets.only(top: _responsive.getHeight(16.0)),
                           child: Text(
-                            "HQs",
+                            "Séries de TV",
                             style: BatFonts.createTitle(),
                           ),
                         )
@@ -141,45 +148,16 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      MenuBox(
-                        asset: "assets/images/movies.png",
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                        child: Text(
-                          "Filmes",
-                          style: BatFonts.createTitle(),
-                        ),
-                      )
-                    ],
-                  ),
-                  Expanded(child: Container()),
-                  Column(
-                    children: [
-                      MenuBox(asset: "assets/images/animations.png"),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                        child: Text(
-                          "Séries de TV",
-                          style: BatFonts.createTitle(),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
               Padding(
                 padding:
                     EdgeInsets.symmetric(vertical: _responsive.getHeight(32.0)),
                 child: Column(
                   children: [
-                    MenuBox(asset: "assets/images/games.png"),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, GamesPage.tag);
+                        },
+                        child: MenuBox(asset: "assets/images/games.png")),
                     Padding(
                       padding:
                           EdgeInsets.only(top: _responsive.getHeight(16.0)),

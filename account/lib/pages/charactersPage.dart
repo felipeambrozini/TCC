@@ -1,26 +1,21 @@
+import 'package:account/account.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class InformationBox extends StatefulWidget {
-  final String collection, document;
-
-  const InformationBox(
-      {Key key, @required this.collection, @required this.document})
-      : super(key: key);
-
+class CharactersPage extends StatefulWidget {
+  static const String tag = '/account/CharactersPage';
   @override
-  _InformationBoxState createState() => _InformationBoxState();
+  _CharactersPageState createState() => _CharactersPageState();
 }
 
-class _InformationBoxState extends State<InformationBox> {
+class _CharactersPageState extends State<CharactersPage> {
   BatResponsive _responsive;
   dynamic data;
 
   Future<dynamic> getData() async {
-    final DocumentReference document = Firestore.instance
-        .collection(widget.collection)
-        .document(widget.document);
+    final DocumentReference document =
+        Firestore.instance.collection("batman").document("batman");
 
     await document.get().then<dynamic>((DocumentSnapshot snapshot) async {
       setState(() {
@@ -38,18 +33,95 @@ class _InformationBoxState extends State<InformationBox> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: buildBottomSheet,
-      child: Container(
-        height: _responsive.getHeight(150.0),
-        width: _responsive.getHeight(150.0),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(data['image']),
-            fit: BoxFit.fill,
+    return Scaffold(
+      appBar: BatAppBar(blackFont: true, color: Colors.yellow),
+      body: buildCharactersPage(),
+      backgroundColor: Colors.black,
+    );
+  }
+
+  Widget buildCharactersPage() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: _responsive.getHeight(64.0),
+          width: MediaQuery.of(context).size.width,
+          child: AppBar(
+            backgroundColor: Colors.yellow,
+            centerTitle: true,
+            title: Text(
+              "Personagens",
+              style: BatFonts.createTitle(color: Colors.black),
+            ),
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
           ),
         ),
-      ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: _responsive.getWidth(_responsive.getWidth(16.0)),
+              vertical: _responsive.getHeight(32.0)),
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  GestureDetector(
+                      onTap: buildBottomSheet,
+                      child: MenuBox(asset: "assets/images/batman.png")),
+                  Padding(
+                    padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                    child: Text(
+                      "Batman",
+                      style: BatFonts.createTitle(),
+                    ),
+                  )
+                ],
+              ),
+              Expanded(child: Container()),
+              Column(
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, AliesPage.tag);
+                      },
+                      child: MenuBox(asset: "assets/images/batFamily.png")),
+                  Padding(
+                    padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                    child: Text(
+                      "Aliados",
+                      style: BatFonts.createTitle(),
+                    ),
+                  )
+                ],
+              ),
+              Expanded(child: Container()),
+              Column(
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, VillainsPage.tag);
+                      },
+                      child: MenuBox(asset: "assets/images/vilians.png")),
+                  Padding(
+                    padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                    child: Text(
+                      "Vilões",
+                      style: BatFonts.createTitle(),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 
@@ -161,7 +233,6 @@ class _InformationBoxState extends State<InformationBox> {
                                     data["firstAparation"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
-                                  
                                   ),
                                 ),
                               ],

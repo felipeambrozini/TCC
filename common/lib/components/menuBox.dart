@@ -16,13 +16,14 @@ class _MenuBoxState extends State<MenuBox> {
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+    
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: _responsive.getHeight(200.0),
-      width: _responsive.getHeight(200.0),
+      height: _responsive.getHeight(150.0),
+      width: _responsive.getHeight(150.0),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(widget.asset),

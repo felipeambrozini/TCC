@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "470011224601-a96g91ih18nc7e9pcglvfpmfe2l81jfc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.felipe.batpedia",
+            "certificate_hash": "0d5912572bbbfed5ceceac51e1d924d886fc8d9e"
+          }
+        },
+        {
           "client_id": "470011224601-j43funppobu51s7m55s46k43jqejgomi.apps.googleusercontent.com",
           "client_type": 3
         }
