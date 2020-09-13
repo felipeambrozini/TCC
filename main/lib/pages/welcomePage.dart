@@ -11,6 +11,7 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   BatResponsive _responsive;
+ 
 
   @override
   void initState() {
@@ -91,7 +92,7 @@ class _WelcomePageState extends State<WelcomePage> {
             padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
             child: Text(
               "A enciclopédia digital do Batman, onde você vai encontrar as principais informações do universo do Batman.",
-              style: BatFonts.createParagraph(fontSize: BatFonts.t1),
+              style: BatFonts.createParagraph(fontSize: BatFonts.t3),
             ),
           ),
         ],

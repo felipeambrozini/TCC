@@ -45,3 +45,4 @@ flutter:
     - family: ProximaNovaBold
       fonts:
         - asset: assets/fonts/proxima-nova-bold.otf 
+  

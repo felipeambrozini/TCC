@@ -2,25 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class InformationBox extends StatefulWidget {
-  final String collection, document;
+class GamesInformationBox extends StatefulWidget {
+  final String document;
 
-  const InformationBox(
-      {Key key, @required this.collection, @required this.document})
+  const GamesInformationBox({Key key, @required this.document})
       : super(key: key);
 
   @override
-  _InformationBoxState createState() => _InformationBoxState();
+  _GamesInformationBoxState createState() => _GamesInformationBoxState();
 }
 
-class _InformationBoxState extends State<InformationBox> {
+class _GamesInformationBoxState extends State<GamesInformationBox> {
   BatResponsive _responsive;
   dynamic data;
 
   Future<dynamic> getData() async {
-    final DocumentReference document = Firestore.instance
-        .collection(widget.collection)
-        .document(widget.document);
+    final DocumentReference document =
+        Firestore.instance.collection("games").document(widget.document);
 
     await document.get().then<dynamic>((DocumentSnapshot snapshot) async {
       setState(() {
@@ -45,7 +43,7 @@ class _InformationBoxState extends State<InformationBox> {
         width: _responsive.getHeight(150.0),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(data['image']),
+            image: NetworkImage(data['cover']),
             fit: BoxFit.fill,
           ),
         ),
@@ -85,7 +83,7 @@ class _InformationBoxState extends State<InformationBox> {
                               padding: EdgeInsets.only(
                                   bottom: _responsive.getHeight(16.0)),
                               child: Image.network(
-                                data['image'],
+                                data['cover'],
                                 height: _responsive.getHeight(200.0),
                                 width: _responsive.getHeight(200.0),
                               ),
@@ -94,15 +92,16 @@ class _InformationBoxState extends State<InformationBox> {
                           Row(
                             children: [
                               Text(
-                                "Nome: ",
-                                style:
-                                    BatFonts.createTitle(color: Colors.black),
+                                "Título: ",
+                                style: BatFonts.createTitle(
+                                    color: Colors.black, fontSize: BatFonts.t2),
                               ),
-                              Text(
-                                data["name"],
-                                style: BatFonts.createParagraph(
-                                    color: Colors.black),
-                                textAlign: TextAlign.justify,
+                              Flexible(
+                                child: Text(
+                                  data["title"],
+                                  style: BatFonts.createParagraph(
+                                      color: Colors.black),
+                                ),
                               ),
                             ],
                           ),
@@ -112,32 +111,14 @@ class _InformationBoxState extends State<InformationBox> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Alter ego: ",
-                                  style:
-                                      BatFonts.createTitle(color: Colors.black),
+                                  "Desenvolvedora: ",
+                                  style: BatFonts.createTitle(
+                                      color: Colors.black,
+                                      fontSize: BatFonts.t2),
                                 ),
-                                Text(
-                                  data["alterEgo"],
-                                  style: BatFonts.createParagraph(
-                                      color: Colors.black),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Criador: ",
-                                  style:
-                                      BatFonts.createTitle(color: Colors.black),
-                                ),
-                                Expanded(
+                                Flexible(
                                   child: Text(
-                                    data["creator"],
+                                    data["developer"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,
@@ -152,16 +133,37 @@ class _InformationBoxState extends State<InformationBox> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Primeira aparição: ",
-                                  style:
-                                      BatFonts.createTitle(color: Colors.black),
+                                  "Plataformas: ",
+                                  style: BatFonts.createTitle(
+                                      color: Colors.black,
+                                      fontSize: BatFonts.t2),
                                 ),
                                 Flexible(
                                   child: Text(
-                                    data["firstAparation"],
+                                    data["platforms"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
-                                  
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: _responsive.getHeight(16.0)),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Ano de lançamento: ",
+                                  style: BatFonts.createTitle(
+                                      color: Colors.black,
+                                      fontSize: BatFonts.t2),
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    data["releaseYear"],
+                                    style: BatFonts.createParagraph(
+                                        color: Colors.black),
                                   ),
                                 ),
                               ],
@@ -173,13 +175,14 @@ class _InformationBoxState extends State<InformationBox> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Biografia: ",
-                                  style:
-                                      BatFonts.createTitle(color: Colors.black),
+                                  "Resumo: ",
+                                  style: BatFonts.createTitle(
+                                      color: Colors.black,
+                                      fontSize: BatFonts.t2),
                                 ),
                                 Flexible(
                                   child: Text(
-                                    data["biography"],
+                                    data["resume"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,

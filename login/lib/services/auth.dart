@@ -19,12 +19,6 @@ class Auth {
     return result.user.uid;
   }
 
-  static Future<void> signOut() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
-    FirebaseAuth.instance.signOut();
-  }
-
   static Future<void> forgotPasswordEmail(String email) async {
     await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
@@ -107,5 +101,10 @@ class Auth {
     } else {
       return null;
     }
+  }
+
+  Future<void> signOut() async {
+    final auth = FirebaseAuth.instance;
+    return auth.signOut();
   }
 }

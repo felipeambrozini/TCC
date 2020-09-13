@@ -1,21 +1,27 @@
-import 'package:account/account.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class CharactersPage extends StatefulWidget {
-  static const String tag = '/account/CharactersPage';
+class CharactersInformationBox extends StatefulWidget {
+  final String collection, document;
+
+  const CharactersInformationBox(
+      {Key key, @required this.collection, @required this.document})
+      : super(key: key);
+
   @override
-  _CharactersPageState createState() => _CharactersPageState();
+  _CharactersInformationBoxState createState() =>
+      _CharactersInformationBoxState();
 }
 
-class _CharactersPageState extends State<CharactersPage> {
+class _CharactersInformationBoxState extends State<CharactersInformationBox> {
   BatResponsive _responsive;
   dynamic data;
 
   Future<dynamic> getData() async {
-    final DocumentReference document =
-        Firestore.instance.collection("batman").document("batman");
+    final DocumentReference document = Firestore.instance
+        .collection(widget.collection)
+        .document(widget.document);
 
     await document.get().then<dynamic>((DocumentSnapshot snapshot) async {
       setState(() {
@@ -33,99 +39,17 @@ class _CharactersPageState extends State<CharactersPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: buildCharactersPage(),
-      backgroundColor: Colors.black,
-    );
-  }
-
-  Widget buildCharactersPage() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [buildTop(), buildBody()],
-    );
-  }
-
-  Widget buildTop() {
-    return Container(
-      height: _responsive.getHeight(64.0),
-      width: MediaQuery.of(context).size.width,
-      child: AppBar(
-        backgroundColor: Colors.yellow,
-        centerTitle: true,
-        title: Text(
-          "Personagens",
-          style: BatFonts.createTitle(color: Colors.black),
+    return GestureDetector(
+      onTap: buildBottomSheet,
+      child: Container(
+        height: _responsive.getHeight(150.0),
+        width: _responsive.getHeight(150.0),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(data['image']),
+            fit: BoxFit.fill,
+          ),
         ),
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            }),
-      ),
-    );
-  }
-
-  Widget buildBody() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: _responsive.getWidth(_responsive.getWidth(16.0)),
-          vertical: _responsive.getHeight(32.0)),
-      child: Row(
-        children: [
-          Column(
-            children: [
-              GestureDetector(
-                  onTap: buildBottomSheet,
-                  child: MenuBox(asset: "assets/images/batman.png")),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                child: Text(
-                  "Batman",
-                  style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                ),
-              )
-            ],
-          ),
-          Expanded(child: Container()),
-          Column(
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, AliesPage.tag);
-                  },
-                  child: MenuBox(asset: "assets/images/batFamily.png")),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                child: Text(
-                  "Aliados",
-                  style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                ),
-              )
-            ],
-          ),
-          Expanded(child: Container()),
-          Column(
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, VillainsPage.tag);
-                  },
-                  child: MenuBox(asset: "assets/images/vilians.png")),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                child: Text(
-                  "Vilões",
-                  style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                ),
-              )
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -176,7 +100,7 @@ class _CharactersPageState extends State<CharactersPage> {
                                     color: Colors.black, fontSize: BatFonts.t2),
                               ),
                               Text(
-                                data["name"],
+                               data["name"],
                                 style: BatFonts.createParagraph(
                                     color: Colors.black),
                                 textAlign: TextAlign.justify,
@@ -218,8 +142,8 @@ class _CharactersPageState extends State<CharactersPage> {
                                   child: Text(
                                     data["creator"],
                                     style: BatFonts.createParagraph(
-                                        color: Colors.black,
-                                        fontSize: BatFonts.t2),
+                                      color: Colors.black,
+                                    ),
                                     textAlign: TextAlign.justify,
                                   ),
                                 ),

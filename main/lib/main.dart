@@ -50,6 +50,7 @@ class BatPedia extends StatelessWidget {
           MoviesPage.tag: (context) => MoviesPage(),
           TVSeriesPage.tag: (context) => TVSeriesPage(),
           GamesPage.tag: (context) => GamesPage(),
+          GadgetsPage.tag: (context) => GadgetsPage(),
         },
       ),
     );

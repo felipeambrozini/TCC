@@ -61,31 +61,33 @@ class _AliesPageState extends State<AliesPage> {
         child: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: _responsive.getWidth(16.0),
-              vertical: _responsive.getHeight(64.0)),
+              vertical: _responsive.getHeight(32.0)),
           child: Column(
             children: [
               Row(
                 children: [
-                  InformationBox(
+                  CharactersInformationBox(
                       collection: "alies", document: "alfredPennyworth"),
                   Expanded(child: Container()),
-                  InformationBox(
+                  CharactersInformationBox(
                       collection: "alies", document: "barbaraGordon"),
                   Expanded(child: Container()),
-                  InformationBox(collection: "alies", document: "carrieKelley")
+                  CharactersInformationBox(
+                      collection: "alies", document: "carrieKelley")
                 ],
               ),
               Padding(
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "alies", document: "cassandraCain"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "alies", document: "damianWayne"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "alies", document: "dickGrayson")
+                    CharactersInformationBox(
+                        collection: "alies", document: "dickGrayson")
                   ],
                 ),
               ),
@@ -93,12 +95,14 @@ class _AliesPageState extends State<AliesPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "alies", document: "jamesGordon"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "alies", document: "jasonTodd"),
+                    CharactersInformationBox(
+                        collection: "alies", document: "jasonTodd"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "alies", document: "kathyKane")
+                    CharactersInformationBox(
+                        collection: "alies", document: "kathyKane")
                   ],
                 ),
               ),
@@ -106,12 +110,14 @@ class _AliesPageState extends State<AliesPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(collection: "alies", document: "luciusFox"),
+                    CharactersInformationBox(
+                        collection: "alies", document: "luciusFox"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "alies", document: "stephanieBrown"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "alies", document: "timDrake")
+                    CharactersInformationBox(
+                        collection: "alies", document: "timDrake")
                   ],
                 ),
               ),

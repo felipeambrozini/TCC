@@ -9,3 +9,4 @@ export 'pages/hQsPage.dart';
 export 'pages/moviesPage.dart';
 export 'pages/gamesPage.dart';
 export 'pages/tvSeriesPage.dart';
+export 'pages/gadgetsPage.dart';

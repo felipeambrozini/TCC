@@ -3,9 +3,11 @@ library common;
 // Components
 export 'components/appBar.dart';
 export 'components/button.dart';
-export 'components/informationBox.dart';
+export 'components/charactersInformationBox.dart';
+export 'components/gamesInformationBox.dart';
 export 'components/menuBox.dart';
 export 'components/scrollIcon.dart';
+export 'components/drawer.dart';
 
 // Consts
 export 'consts/fonts.dart';

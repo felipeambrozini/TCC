@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
             "Email: ",
-            style: BatFonts.createTitle(),
+            style: BatFonts.createTitle(fontSize: BatFonts.t2),
           ),
         ),
         Flexible(
@@ -166,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
           child: Text(
             "Senha: ",
-            style: BatFonts.createTitle(),
+            style: BatFonts.createTitle(fontSize: BatFonts.t2),
           ),
         ),
         Flexible(

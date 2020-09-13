@@ -66,24 +66,28 @@ class _VillainsPageState extends State<VillainsPage> {
             children: [
               Row(
                 children: [
-                  InformationBox(collection: "vilians", document: "anarquia"),
+                  CharactersInformationBox(
+                      collection: "vilians", document: "anarquia"),
                   Expanded(child: Container()),
-                  InformationBox(collection: "vilians", document: "arlequina"),
+                  CharactersInformationBox(
+                      collection: "vilians", document: "arlequina"),
                   Expanded(child: Container()),
-                  InformationBox(collection: "vilians", document: "bane"),
+                  CharactersInformationBox(
+                      collection: "vilians", document: "bane"),
                 ],
               ),
               Padding(
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "caraDeBarro"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "chapeleiroLouco"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "vilians", document: "charada"),
+                    CharactersInformationBox(
+                        collection: "vilians", document: "charada"),
                   ],
                 ),
               ),
@@ -91,12 +95,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "cobraVenenosa"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "vilians", document: "coringa"),
+                    CharactersInformationBox(
+                        collection: "vilians", document: "coringa"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "crocodilo"),
                   ],
                 ),
@@ -105,13 +110,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "duasCaras"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "duelaDent"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "espantalho"),
                   ],
                 ),
@@ -120,13 +125,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "exterminador"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "grandeTubaraoBranco"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "heraVenenosa"),
                   ],
                 ),
@@ -135,13 +140,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "homemCalendario"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "homemCoruja"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "homemGato"),
                   ],
                 ),
@@ -150,12 +155,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "hugoStrange"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "vilians", document: "kgbesta"),
+                    CharactersInformationBox(
+                        collection: "vilians", document: "kgbesta"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "mariposaAssassina"),
                   ],
                 ),
@@ -164,13 +170,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "mascaraNegra"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "maxieZeus"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "mestreDasPistas"),
                   ],
                 ),
@@ -179,13 +185,14 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "morcegoHumano"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "mulherGato"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "vilians", document: "pinguim"),
+                    CharactersInformationBox(
+                        collection: "vilians", document: "pinguim"),
                   ],
                 ),
               ),
@@ -193,13 +200,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "pistoleiro"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "prometheus"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "rasAlGhul"),
                   ],
                 ),
@@ -208,12 +215,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "senhorFrio"),
                     Expanded(child: Container()),
-                    InformationBox(collection: "vilians", document: "silencio"),
+                    CharactersInformationBox(
+                        collection: "vilians", document: "silencio"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "solomonGrundy"),
                   ],
                 ),
@@ -222,12 +230,13 @@ class _VillainsPageState extends State<VillainsPage> {
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    InformationBox(collection: "vilians", document: "vagalume"),
+                    CharactersInformationBox(
+                        collection: "vilians", document: "vagalume"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "ventriloquo"),
                     Expanded(child: Container()),
-                    InformationBox(
+                    CharactersInformationBox(
                         collection: "vilians", document: "victorZsasz"),
                   ],
                 ),

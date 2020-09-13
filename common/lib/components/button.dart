@@ -38,7 +38,8 @@ class _BatButtonState extends State<BatButton> {
           padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(20.0)),
           child: Text(widget.text,
               textAlign: TextAlign.center,
-              style: BatFonts.createTitle(color: Colors.black)),
+              style: BatFonts.createTitle(
+                  color: Colors.black, fontSize: BatFonts.t2)),
         ),
         onPressed: widget.onPressed,
       ),
