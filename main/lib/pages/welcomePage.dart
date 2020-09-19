@@ -62,7 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
       child: Column(
         children: [
           Text(
-            "BatPedia",
+            "BatPédia",
             style: BatFonts.createTitle(),
           ),
           Padding(

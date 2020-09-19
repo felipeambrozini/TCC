@@ -4,7 +4,6 @@ import 'package:login/login.dart';
 import 'package:account/account.dart';
 import 'pages/splashScreen.dart';
 import 'pages/welcomePage.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
