@@ -20,11 +20,6 @@ class _BatDrawerState extends State<BatDrawer> {
       'routeName': null,
     },
     {
-      'icon': Icons.title,
-      'label': 'Termos',
-      'routeName': null,
-    },
-    {
       'icon': Icons.info,
       'label': 'Sobre o aplicativo',
       'routeName': null,
@@ -130,7 +125,7 @@ class _BatDrawerState extends State<BatDrawer> {
               padding: EdgeInsets.only(left: _responsive.getWidth(20.0)),
               child: Text(
                 item['label'],
-                style: BatFonts.createParagraph(
+                style: BatFonts.createTitle(
                   color: Colors.black,
                 ),
               ),
@@ -151,11 +146,22 @@ class _BatDrawerState extends State<BatDrawer> {
             Navigator.of(context)
                 .popUntil(ModalRoute.withName(WelcomePage.tag));
           },
-          child: Text(
-            "Sair",
-            style: BatFonts.createTitle(
-              color: Colors.black,
-            ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.exit_to_app,
+                color: Colors.black,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: _responsive.getWidth(20.0)),
+                child: Text(
+                  "Sair",
+                  style: BatFonts.createTitle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       );

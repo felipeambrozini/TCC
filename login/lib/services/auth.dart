@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth {
+  
   static Future<String> signIn(String email, String password) async {
     final auth = FirebaseAuth.instance;
     final result =

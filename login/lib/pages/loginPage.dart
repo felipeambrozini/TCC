@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
           style: BatFonts.createTitle(color: Colors.black),
         ),
         messageText: Text(
-          error.toString(),
+         Auth.getExceptionText(error),
           style: BatFonts.createParagraph(color: Colors.black),
         ),
         backgroundColor: Colors.yellow,
