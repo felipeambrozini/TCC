@@ -11,7 +11,7 @@ class BatDrawer extends StatefulWidget {
 class _BatDrawerState extends State<BatDrawer> {
   BatResponsive _responsive;
   Auth _auth;
-  User _user;
+  BatUser _user;
 
   List<Map> optionsList = [
     {
@@ -31,11 +31,11 @@ class _BatDrawerState extends State<BatDrawer> {
     super.initState();
     _responsive = BatResponsive();
     _auth = Auth();
-    _user = User();
+    _user = BatUser();
     Auth.getUserLocal().then(_onGetUserLocalSuccess);
   }
 
-  void _onGetUserLocalSuccess(User user) {
+  void _onGetUserLocalSuccess(BatUser user) {
     setState(() {
       _user = user;
     });

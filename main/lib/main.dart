@@ -4,6 +4,7 @@ import 'package:login/login.dart';
 import 'package:account/account.dart';
 import 'pages/splashScreen.dart';
 import 'pages/welcomePage.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -45,11 +46,11 @@ class BatPedia extends StatelessWidget {
           CharactersPage.tag: (context) => CharactersPage(),
           AliesPage.tag: (context) => AliesPage(),
           VillainsPage.tag: (context) => VillainsPage(),
+          GadgetsPage.tag: (context) => GadgetsPage(),
           HQsPage.tag: (context) => HQsPage(),
           MoviesPage.tag: (context) => MoviesPage(),
           TVSeriesPage.tag: (context) => TVSeriesPage(),
           GamesPage.tag: (context) => GamesPage(),
-          GadgetsPage.tag: (context) => GadgetsPage(),
         },
       ),
     );

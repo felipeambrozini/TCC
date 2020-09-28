@@ -12,17 +12,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   BatResponsive _responsive;
-  User _user;
+  BatUser _user;
 
   @override
   void initState() {
     super.initState();
     _responsive = BatResponsive();
-    _user = User();
+    _user = BatUser();
     Auth.getUserLocal().then(_onGetUserLocalSuccess);
   }
 
-  void _onGetUserLocalSuccess(User user) {
+  void _onGetUserLocalSuccess(BatUser user) {
     setState(() {
       _user = user;
     });

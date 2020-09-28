@@ -340,7 +340,7 @@ class _RegisterPageState extends State<RegisterPage> {
           style: BatFonts.createTitle(color: Colors.black),
         ),
         messageText: Text(
-          Auth.getExceptionText(error),
+         Auth.getExceptionText(error),
           style: BatFonts.createParagraph(color: Colors.black),
         ),
         backgroundColor: Colors.yellow,
@@ -353,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final email = emailController.text;
     final name = nameController.text;
 
-    final user = User(userId: userId, name: name, email: email);
+    final user = BatUser(userId: userId, name: name, email: email);
     Auth.addUser(user).then(_onResultAddUser);
   }
 

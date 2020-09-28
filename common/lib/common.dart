@@ -10,13 +10,10 @@ export 'components/moviesInformationBox.dart';
 export 'components/scrollIcon.dart';
 export 'components/drawer.dart';
 
-// Consts
-export 'consts/fonts.dart';
-export 'consts/responsive.dart';
-export 'consts/wigets.dart';
-
 //Functions
+export 'functions/fonts.dart';
 export 'functions/validations.dart';
+export 'functions/responsive.dart';
 
 //Models
 export 'models/user.dart';

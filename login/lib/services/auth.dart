@@ -29,7 +29,7 @@ class Auth {
     return user;
   }
 
-  static Future<void> addUser(User user) async {
+  static Future<void> addUser(BatUser user) async {
     checkUserExist(user.userId).then((value) {
       if (!value) {
         Firestore.instance
@@ -51,13 +51,13 @@ class Auth {
     }
   }
 
-  static Future<User> getUser(String userId) {
+  static Future<BatUser> getUser(String userId) {
     if (userId != null) {
       return Firestore.instance
           .collection('users')
           .document(userId)
           .get()
-          .then((documentSnapshot) => User.fromDocument(documentSnapshot));
+          .then((documentSnapshot) => BatUser.fromDocument(documentSnapshot));
     } else {
       print('firestore userId can not be null');
       return null;
@@ -87,17 +87,17 @@ class Auth {
     }
   }
 
-  static Future<String> storeUserLocal(User user) async {
+  static Future<String> storeUserLocal(BatUser user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String storeUser = user.toJson();
     await prefs.setString('user', storeUser);
     return user.userId;
   }
 
-  static Future<User> getUserLocal() async {
+  static Future<BatUser> getUserLocal() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString('user') != null) {
-      User user = User.fromJson(prefs.getString('user'));
+      BatUser user = BatUser.fromJson(prefs.getString('user'));
       return user;
     } else {
       return null;

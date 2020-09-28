@@ -1,22 +1,22 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
+class BatUser {
   String userId;
   String name;
   String email;
 
-  User({this.userId, this.name, this.email});
+  BatUser({this.userId, this.name, this.email});
 
-  factory User.fromDocument(DocumentSnapshot document) {
-    return User.fromMap(document.data);
+  factory BatUser.fromDocument(DocumentSnapshot document) {
+    return BatUser.fromMap(document.data);
   }
 
-  factory User.fromJson(String str) => User.fromMap(json.decode(str));
+  factory BatUser.fromJson(String str) => BatUser.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromMap(Map<String, dynamic> json) => User(
+  factory BatUser.fromMap(Map<String, dynamic> json) => BatUser(
         userId: json["userID"] == null ? null : json["userID"],
         name: json["name"] == null ? null : json["name"],
         email: json["email"] == null ? null : json["email"],
