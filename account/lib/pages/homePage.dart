@@ -1,4 +1,5 @@
 import 'package:account/account.dart';
+import 'package:account/pages/batmanPage.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:login/login.dart';
@@ -112,86 +113,110 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.symmetric(horizontal: _responsive.getWidth(32.0)),
           child: Column(
             children: [
-              Row(
-                children: [
-                  GestureDetector(
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, BatmanPage.tag);
+                  },
+                  child: Column(
+                    children: [
+                      MenuBox(asset: "assets/images/batman.png"),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                        child: Text(
+                          "Batman",
+                          style: BatFonts.createTitle(fontSize: BatFonts.t2),
+                        ),
+                      )
+                    ],
+                  )),
+              Padding(
+                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
+                child: Row(
+                  children: [
+                    GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, CharactersPage.tag);
+                        Navigator.pushNamed(context, AliesPage.tag);
                       },
                       child: Column(
                         children: [
-                          MenuBox(asset: "assets/images/characters.jpg"),
+                          MenuBox(asset: "assets/images/batFamily.png"),
                           Padding(
                             padding: EdgeInsets.only(
                                 top: _responsive.getHeight(16.0)),
                             child: Text(
-                              "Personagens",
+                              "Aliados",
                               style:
                                   BatFonts.createTitle(fontSize: BatFonts.t2),
                             ),
                           )
                         ],
-                      )),
-                  Expanded(child: Container()),
-                  Column(
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, GadgetsPage.tag);
-                          },
-                          child: MenuBox(asset: "assets/images/gadgets.jpg")),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                        child: Text(
-                          "Acessórios",
-                          style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+                      ),
+                    ),
+                    Expanded(child: Container()),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, VillainsPage.tag);
+                        },
+                        child: Column(
+                          children: [
+                            MenuBox(asset: "assets/images/vilians.png"),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: _responsive.getHeight(16.0)),
+                              child: Text(
+                                "Vilões",
+                                style:
+                                    BatFonts.createTitle(fontSize: BatFonts.t2),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
                 child: Row(
                   children: [
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, HQsPage.tag);
-                          },
-                          child: MenuBox(asset: "assets/images/hqs.png"),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                          child: Text(
-                            "HQs",
-                            style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                          ),
-                        )
-                      ],
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, HQsPage.tag);
+                      },
+                      child: Column(
+                        children: [
+                          MenuBox(asset: "assets/images/hqs.png"),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: _responsive.getHeight(16.0)),
+                            child: Text(
+                              "HQs",
+                              style:
+                                  BatFonts.createTitle(fontSize: BatFonts.t2),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     Expanded(child: Container()),
-                    Column(
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, MoviesPage.tag);
-                            },
-                            child: MenuBox(asset: "assets/images/movies.png")),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                          child: Text(
-                            "Filmes",
-                            style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                          ),
-                        )
-                      ],
-                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, MoviesPage.tag);
+                        },
+                        child: Column(
+                          children: [
+                            MenuBox(asset: "assets/images/movies.png"),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  top: _responsive.getHeight(16.0)),
+                              child: Text(
+                                "Filmes",
+                                style:
+                                    BatFonts.createTitle(fontSize: BatFonts.t2),
+                              ),
+                            )
+                          ],
+                        )),
                   ],
                 ),
               ),

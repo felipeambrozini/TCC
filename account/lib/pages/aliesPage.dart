@@ -14,6 +14,7 @@ class _AliesPageState extends State<AliesPage> {
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+
   }
 
   @override

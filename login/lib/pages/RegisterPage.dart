@@ -372,7 +372,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Padding(
             padding:
                 EdgeInsets.symmetric(vertical: _responsive.getHeight(64.0)),
-            child: Image.asset("assets/images/batFamily.jpg"),
+            child: Image.asset("assets/images/batFamily.png"),
           ),
           Text(
             "Cadastro realizado com sucesso. \nBem-vindo ao BatPédia!",
