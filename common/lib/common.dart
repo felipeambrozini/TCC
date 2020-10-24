@@ -7,6 +7,7 @@ export 'components/menuBox.dart';
 export 'components/charactersInformationBox.dart';
 export 'components/gamesInformationBox.dart';
 export 'components/moviesInformationBox.dart';
+export 'components/tvSeriesInformationBox.dart';
 export 'components/scrollIcon.dart';
 export 'components/drawer.dart';
 

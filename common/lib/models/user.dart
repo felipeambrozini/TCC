@@ -17,14 +17,13 @@ class BatUser {
   String toJson() => json.encode(toMap());
 
   factory BatUser.fromMap(Map<String, dynamic> json) => BatUser(
-        userId: json["userID"] == null ? null : json["userID"],
-        name: json["name"] == null ? null : json["name"],
-        email: json["email"] == null ? null : json["email"],
-      );
+      userId: json["userID"] == null ? null : json["userID"],
+      name: json["name"] == null ? null : json["name"],
+      email: json["email"] == null ? null : json["email"]);
 
   Map<String, dynamic> toMap() => {
         "userID": userId == null ? null : userId,
         "name": name == null ? null : name,
-        "email": email == null ? null : email,
+        "email": email == null ? null : email
       };
 }

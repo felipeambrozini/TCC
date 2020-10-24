@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
             style: BatFonts.createTitle(fontSize: BatFonts.t2),
           ),
         ),
-        Flexible(
+        Expanded(
           child: TextField(
             autofocus: true,
             cursorColor: Colors.yellow,
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
             style: BatFonts.createTitle(fontSize: BatFonts.t2),
           ),
         ),
-        Flexible(
+        Expanded(
           child: TextField(
             cursorColor: Colors.yellow,
             style: BatFonts.createParagraph(),
@@ -245,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
           style: BatFonts.createTitle(color: Colors.black),
         ),
         messageText: Text(
-         Auth.getExceptionText(error),
+          Auth.getExceptionText(error),
           style: BatFonts.createParagraph(color: Colors.black),
         ),
         backgroundColor: Colors.yellow,

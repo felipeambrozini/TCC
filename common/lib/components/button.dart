@@ -7,8 +7,7 @@ class BatButton extends StatefulWidget {
   final bool isRounded;
 
   const BatButton(
-      {Key key, @required this.text, @required this.onPressed, this.isRounded})
-      : super(key: key);
+      {@required this.text, @required this.onPressed, this.isRounded});
 
   @override
   _BatButtonState createState() => _BatButtonState();

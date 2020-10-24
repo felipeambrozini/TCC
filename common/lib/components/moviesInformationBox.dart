@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 class MoviesInformationBox extends StatefulWidget {
   final String document;
 
-  const MoviesInformationBox({Key key, @required this.document})
-      : super(key: key);
+  MoviesInformationBox({@required this.document});
 
   @override
   _MoviesInformationBoxState createState() => _MoviesInformationBoxState();
 }
 
 class _MoviesInformationBoxState extends State<MoviesInformationBox> {
- BatResponsive _responsive;
+  BatResponsive _responsive;
   dynamic data;
 
   Future<dynamic> getData() async {
@@ -44,7 +43,7 @@ class _MoviesInformationBoxState extends State<MoviesInformationBox> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(data['cover']),
-            fit: BoxFit.fill,
+         fit: BoxFit.fill,
           ),
         ),
       ),
@@ -96,7 +95,7 @@ class _MoviesInformationBoxState extends State<MoviesInformationBox> {
                                 style: BatFonts.createTitle(
                                     color: Colors.black, fontSize: BatFonts.t2),
                               ),
-                              Flexible(
+                              Expanded(
                                 child: Text(
                                   data["title"],
                                   style: BatFonts.createParagraph(
@@ -116,7 +115,7 @@ class _MoviesInformationBoxState extends State<MoviesInformationBox> {
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
-                                Flexible(
+                                Expanded(
                                   child: Text(
                                     data["director"],
                                     style: BatFonts.createParagraph(
@@ -138,7 +137,7 @@ class _MoviesInformationBoxState extends State<MoviesInformationBox> {
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
-                                Flexible(
+                                Expanded(
                                   child: Text(
                                     data["cast"],
                                     style: BatFonts.createParagraph(
@@ -178,7 +177,7 @@ class _MoviesInformationBoxState extends State<MoviesInformationBox> {
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
-                                Flexible(
+                                Expanded(
                                   child: Text(
                                     data["synopsis"],
                                     style: BatFonts.createParagraph(

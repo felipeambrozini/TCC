@@ -2,25 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class CharactersInformationBox extends StatefulWidget {
-  final String collection, document;
+class TVSeriesInformationBox extends StatefulWidget {
+  final String document;
 
-  const CharactersInformationBox(
-      {@required this.collection, @required this.document});
-
+  const TVSeriesInformationBox({this.document});
   @override
-  _CharactersInformationBoxState createState() =>
-      _CharactersInformationBoxState();
+  _TVSeriesInformationBoxState createState() => _TVSeriesInformationBoxState();
 }
 
-class _CharactersInformationBoxState extends State<CharactersInformationBox> {
+class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
   BatResponsive _responsive;
   dynamic data;
 
   Future<dynamic> getData() async {
-    final DocumentReference document = Firestore.instance
-        .collection(widget.collection)
-        .document(widget.document);
+    final DocumentReference document =
+        Firestore.instance.collection("tvSeries").document(widget.document);
 
     await document.get().then<dynamic>((DocumentSnapshot snapshot) async {
       setState(() {
@@ -45,7 +41,7 @@ class _CharactersInformationBoxState extends State<CharactersInformationBox> {
         width: _responsive.getHeight(150.0),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(data['image']),
+            image: NetworkImage(data['cover']),
             fit: BoxFit.fill,
           ),
         ),
@@ -85,7 +81,7 @@ class _CharactersInformationBoxState extends State<CharactersInformationBox> {
                               padding: EdgeInsets.only(
                                   bottom: _responsive.getHeight(16.0)),
                               child: Image.network(
-                                data['image'],
+                                data['cover'],
                                 height: _responsive.getHeight(200.0),
                                 width: _responsive.getHeight(200.0),
                               ),
@@ -94,15 +90,16 @@ class _CharactersInformationBoxState extends State<CharactersInformationBox> {
                           Row(
                             children: [
                               Text(
-                                "Nome: ",
+                                "Título: ",
                                 style: BatFonts.createTitle(
                                     color: Colors.black, fontSize: BatFonts.t2),
                               ),
-                              Text(
-                                data["name"],
-                                style: BatFonts.createParagraph(
-                                    color: Colors.black),
-                                textAlign: TextAlign.justify,
+                              Expanded(
+                                child: Text(
+                                  data["title"],
+                                  style: BatFonts.createParagraph(
+                                      color: Colors.black),
+                                ),
                               ),
                             ],
                           ),
@@ -112,27 +109,7 @@ class _CharactersInformationBoxState extends State<CharactersInformationBox> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Alter ego: ",
-                                  style: BatFonts.createTitle(
-                                      color: Colors.black,
-                                      fontSize: BatFonts.t2),
-                                ),
-                                Text(
-                                  data["alterEgo"],
-                                  style: BatFonts.createParagraph(
-                                      color: Colors.black),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Criador: ",
+                                  "Showrunner : ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
@@ -141,8 +118,7 @@ class _CharactersInformationBoxState extends State<CharactersInformationBox> {
                                   child: Text(
                                     data["creator"],
                                     style: BatFonts.createParagraph(
-                                      color: Colors.black,
-                                    ),
+                                        color: Colors.black),
                                     textAlign: TextAlign.justify,
                                   ),
                                 ),
@@ -155,17 +131,36 @@ class _CharactersInformationBoxState extends State<CharactersInformationBox> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Primeira aparição: ",
+                                  "Elenco: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
                                 Expanded(
                                   child: Text(
-                                    data["firstAparation"],
+                                    data["cast"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                   ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                top: _responsive.getHeight(16.0)),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Anos de exibição: ",
+                                  style: BatFonts.createTitle(
+                                      color: Colors.black,
+                                      fontSize: BatFonts.t2),
+                                ),
+                                Text(
+                                  data["exhibitionYears"],
+                                  style: BatFonts.createParagraph(
+                                      color: Colors.black),
                                 ),
                               ],
                             ),
@@ -176,14 +171,14 @@ class _CharactersInformationBoxState extends State<CharactersInformationBox> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Biografia: ",
+                                  "Sinopse: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
                                 Expanded(
                                   child: Text(
-                                    data["biography"],
+                                    data["synopsis"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,

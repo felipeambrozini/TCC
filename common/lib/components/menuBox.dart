@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class MenuBox extends StatefulWidget {
   final String asset;
 
-  const MenuBox({Key key, @required this.asset}) : super(key: key);
+   MenuBox({@required this.asset});
+
   @override
   _MenuBoxState createState() => _MenuBoxState();
 }
@@ -16,7 +17,6 @@ class _MenuBoxState extends State<MenuBox> {
   void initState() {
     super.initState();
     _responsive = BatResponsive();
-    
   }
 
   @override
@@ -27,7 +27,7 @@ class _MenuBoxState extends State<MenuBox> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(widget.asset),
-          fit: BoxFit.fill,
+         fit: BoxFit.fill,
         ),
       ),
     );

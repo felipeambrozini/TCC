@@ -176,7 +176,7 @@ class _RegisterPageState extends State<RegisterPage> {
             style: BatFonts.createTitle(),
           ),
         ),
-        Flexible(
+        Expanded(
           child: TextField(
             cursorColor: Colors.yellow,
             controller: nameController,
@@ -220,7 +220,7 @@ class _RegisterPageState extends State<RegisterPage> {
             style: BatFonts.createTitle(),
           ),
         ),
-        Flexible(
+        Expanded(
           child: TextField(
             cursorColor: Colors.yellow,
             controller: emailController,
@@ -264,7 +264,7 @@ class _RegisterPageState extends State<RegisterPage> {
             style: BatFonts.createTitle(),
           ),
         ),
-        Flexible(
+        Expanded(
           child: TextField(
             cursorColor: Colors.yellow,
             style: BatFonts.createParagraph(),
@@ -340,7 +340,7 @@ class _RegisterPageState extends State<RegisterPage> {
           style: BatFonts.createTitle(color: Colors.black),
         ),
         messageText: Text(
-         Auth.getExceptionText(error),
+          Auth.getExceptionText(error),
           style: BatFonts.createParagraph(color: Colors.black),
         ),
         backgroundColor: Colors.yellow,
@@ -367,7 +367,6 @@ class _RegisterPageState extends State<RegisterPage> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: _responsive.getWidth(16.0)),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding:
@@ -377,6 +376,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Text(
             "Cadastro realizado com sucesso. \nBem-vindo ao BatPédia!",
             style: BatFonts.createTitle(),
+            textAlign: TextAlign.center,
           ),
           buildReturnButton()
         ],

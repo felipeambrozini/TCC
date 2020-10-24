@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 class GamesInformationBox extends StatefulWidget {
   final String document;
 
-  const GamesInformationBox({Key key, @required this.document})
-      : super(key: key);
+  GamesInformationBox({@required this.document});
 
   @override
   _GamesInformationBoxState createState() => _GamesInformationBoxState();
@@ -44,7 +43,7 @@ class _GamesInformationBoxState extends State<GamesInformationBox> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(data['cover']),
-            fit: BoxFit.fill,
+     fit: BoxFit.fill,
           ),
         ),
       ),
@@ -96,7 +95,7 @@ class _GamesInformationBoxState extends State<GamesInformationBox> {
                                 style: BatFonts.createTitle(
                                     color: Colors.black, fontSize: BatFonts.t2),
                               ),
-                              Flexible(
+                              Expanded(
                                 child: Text(
                                   data["title"],
                                   style: BatFonts.createParagraph(
@@ -116,7 +115,7 @@ class _GamesInformationBoxState extends State<GamesInformationBox> {
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
-                                Flexible(
+                                Expanded(
                                   child: Text(
                                     data["developer"],
                                     style: BatFonts.createParagraph(
@@ -138,7 +137,7 @@ class _GamesInformationBoxState extends State<GamesInformationBox> {
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
-                                Flexible(
+                                Expanded(
                                   child: Text(
                                     data["platforms"],
                                     style: BatFonts.createParagraph(
@@ -159,7 +158,7 @@ class _GamesInformationBoxState extends State<GamesInformationBox> {
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
-                                Flexible(
+                                Expanded(
                                   child: Text(
                                     data["releaseYear"],
                                     style: BatFonts.createParagraph(
@@ -180,7 +179,7 @@ class _GamesInformationBoxState extends State<GamesInformationBox> {
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
-                                Flexible(
+                                Expanded(
                                   child: Text(
                                     data["resume"],
                                     style: BatFonts.createParagraph(
