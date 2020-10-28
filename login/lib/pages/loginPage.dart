@@ -6,6 +6,9 @@ import 'package:account/account.dart';
 
 class LoginPage extends StatefulWidget {
   static const String tag = '/login/loginPage';
+  final StateSetter setLoginStatter;
+
+  LoginPage({this.setLoginStatter});
 
   @override
   _LoginPageState createState() => _LoginPageState();

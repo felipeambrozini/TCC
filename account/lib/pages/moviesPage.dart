@@ -20,7 +20,7 @@ class _MoviesPageState extends State<MoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: buildMoviesPage(),
+      body: SafeArea(child: buildMoviesPage()),
       backgroundColor: Colors.black,
     );
   }

@@ -20,7 +20,7 @@ class _HQsPageState extends State<HQsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: buildHQsPage(),
+      body: SafeArea(child: buildHQsPage()),
       backgroundColor: Colors.black,
     );
   }

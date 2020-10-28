@@ -20,7 +20,7 @@ class _VillainsPageState extends State<VillainsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: buildAliesPage(),
+      body: SafeArea(child: buildAliesPage()),
       backgroundColor: Colors.black,
     );
   }

@@ -20,7 +20,7 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: buildTVSeriesPage(),
+      body: SafeArea(child: buildTVSeriesPage()),
       backgroundColor: Colors.black,
     );
   }

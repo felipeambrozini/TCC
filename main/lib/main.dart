@@ -37,6 +37,8 @@ class BatPedia extends StatelessWidget {
           );
         },
         title: 'BatPedia',
+        color: Colors.yellow,
+        theme: ThemeData.dark(),
         home: SplashScreen(),
         routes: {
           WelcomePage.tag: (context) => WelcomePage(),

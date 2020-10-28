@@ -20,7 +20,7 @@ class _BatmanPageState extends State<BatmanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: buildBatmanage(),
+      body: SafeArea(child: buildBatmanage()),
       backgroundColor: Colors.black,
     );
   }

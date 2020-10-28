@@ -11,7 +11,6 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   BatResponsive _responsive;
- 
 
   @override
   void initState() {
@@ -20,39 +19,65 @@ class _WelcomePageState extends State<WelcomePage> {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
 
-  buildBottomSheet(BottomSheetType type) {
+  buildLoginPageBottomSheet() {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         builder: (context) {
-          return Container(
-              margin: EdgeInsets.only(top: _responsive.getHeight(160.0)),
-              decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(_responsive.getWidth(20.0)),
-                    topRight: Radius.circular(_responsive.getWidth(20.0)),
-                  )),
-              child:
-                  type == BottomSheetType.LOGIN ? LoginPage() : RegisterPage());
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setLoginState) {
+            return Container(
+                margin: EdgeInsets.only(top: _responsive.getHeight(160.0)),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(_responsive.getWidth(20.0)),
+                      topRight: Radius.circular(_responsive.getWidth(20.0)),
+                    )),
+                child: LoginPage(setLoginStatter: setLoginState));
+          });
+        });
+  }
+
+  buildRegisterPageBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return StatefulBuilder(
+              builder: (BuildContext context, StateSetter setRegisterStatter) {
+            return Container(
+                margin: EdgeInsets.only(top: _responsive.getHeight(160.0)),
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(_responsive.getWidth(20.0)),
+                      topRight: Radius.circular(_responsive.getWidth(20.0)),
+                    )),
+                child: RegisterPage(setRegisterStatter: setRegisterStatter));
+          });
         });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      backgroundColor: Colors.black,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Center(child: buildLogo()),
-          buildWelcomeMensage(),
-          Expanded(child: Container()),
-          buildButtons(),
-        ],
-      ),
+        appBar: BatAppBar(blackFont: true, color: Colors.yellow),
+        backgroundColor: Colors.black,
+        body: SafeArea(child: buildWelcomePage()));
+  }
+
+  Widget buildWelcomePage() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Center(child: buildLogo()),
+        buildWelcomeMensage(),
+        Expanded(child: Container()),
+        buildButtons(),
+      ],
     );
   }
 
@@ -109,23 +134,16 @@ class _WelcomePageState extends State<WelcomePage> {
           children: <Widget>[
             Expanded(
               child: BatButton(
-                onPressed: () {
-                  buildBottomSheet(BottomSheetType.LOGIN);
-                },
+                onPressed: buildLoginPageBottomSheet,
                 text: 'Login',
               ),
             ),
             Expanded(
               child: BatButton(
-                text: 'Cadastro',
-                onPressed: () {
-                  buildBottomSheet(BottomSheetType.REGISTER);
-                },
-              ),
+                  text: 'Cadastro', onPressed: buildRegisterPageBottomSheet),
             ),
           ],
         ),
       );
 }
 
-enum BottomSheetType { LOGIN, REGISTER }

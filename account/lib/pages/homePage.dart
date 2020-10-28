@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
           child: BatDrawer()),
-      body: buildHomePage(),
+      body: SafeArea(child: buildHomePage()),
       backgroundColor: Colors.black,
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
     );

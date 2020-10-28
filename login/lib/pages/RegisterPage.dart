@@ -7,6 +7,10 @@ import 'package:main/pages/welcomePage.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String tag = '/login/registerPage';
+  final StateSetter setRegisterStatter;
+
+  RegisterPage({this.setRegisterStatter});
+
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
