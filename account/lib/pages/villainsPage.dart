@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
@@ -57,193 +58,25 @@ class _VillainsPageState extends State<VillainsPage> {
 
   Widget buildBody() {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: _responsive.getWidth(16.0),
-              vertical: _responsive.getHeight(64.0)),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  CharactersInformationBox(
-                      collection: "vilians", document: "anarquia"),
-                  Expanded(child: Container()),
-                  CharactersInformationBox(
-                      collection: "vilians", document: "arlequina"),
-                  Expanded(child: Container()),
-                  CharactersInformationBox(
-                      collection: "vilians", document: "bane"),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "caraDeBarro"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "chapeleiroLouco"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "charada"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "cobraVenenosa"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "coringa"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "crocodilo"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "duasCaras"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "duelaDent"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "espantalho"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "exterminador"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "grandeTubaraoBranco"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "heraVenenosa"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "homemCalendario"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "homemCoruja"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "homemGato"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "hugoStrange"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "kgbesta"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "mariposaAssassina"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "mascaraNegra"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "maxieZeus"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "mestreDasPistas"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "morcegoHumano"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "mulherGato"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "pinguim"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "pistoleiro"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "prometheus"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "rasAlGhul"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "senhorFrio"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "silencio"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "solomonGrundy"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "vilians", document: "vagalume"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "ventriloquo"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "vilians", document: "victorZsasz"),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: StreamBuilder(
+        stream: Firestore.instance.collection('vilians').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+                child: Text(
+              'Carregando os vilões',
+              style: BatFonts.createTitle(color: Colors.yellow),
+            ));
+          }
+          return GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (BuildContext context, int index) {
+              return Image.network(snapshot.data.documents[index]['image']);
+            },
+            itemCount: snapshot.data.documents.length,
+          );
+        },
       ),
     );
   }

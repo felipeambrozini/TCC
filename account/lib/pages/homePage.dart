@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Column(
                     children: [
-                      MenuBox(asset: "assets/images/batman.png"),
+                      MenuBox(asset: "assets/images/batman.jpg"),
                       Padding(
                         padding:
                             EdgeInsets.only(top: _responsive.getHeight(16.0)),

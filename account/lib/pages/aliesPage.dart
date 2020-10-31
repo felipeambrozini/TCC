@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,6 @@ class _AliesPageState extends State<AliesPage> {
   void initState() {
     super.initState();
     _responsive = BatResponsive();
-
   }
 
   @override
@@ -58,73 +58,21 @@ class _AliesPageState extends State<AliesPage> {
 
   Widget buildBody() {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: _responsive.getWidth(16.0),
-              vertical: _responsive.getHeight(32.0)),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  CharactersInformationBox(
-                      collection: "alies", document: "alfredPennyworth"),
-                  Expanded(child: Container()),
-                  CharactersInformationBox(
-                      collection: "alies", document: "barbaraGordon"),
-                  Expanded(child: Container()),
-                  CharactersInformationBox(
-                      collection: "alies", document: "carrieKelley")
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "alies", document: "cassandraCain"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "alies", document: "damianWayne"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "alies", document: "dickGrayson")
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "alies", document: "jamesGordon"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "alies", document: "jasonTodd"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "alies", document: "kathyKane")
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    CharactersInformationBox(
-                        collection: "alies", document: "luciusFox"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "alies", document: "stephanieBrown"),
-                    Expanded(child: Container()),
-                    CharactersInformationBox(
-                        collection: "alies", document: "timDrake")
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: StreamBuilder(
+        stream: Firestore.instance.collection('alies').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: Text('Carregando os aliados'));
+          }
+          return GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (BuildContext context, int index) {
+              return Image.network(snapshot.data.documents[index]['image']);
+            },
+            itemCount: snapshot.data.documents.length,
+          );
+        },
       ),
     );
   }

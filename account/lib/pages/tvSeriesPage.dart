@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
@@ -57,65 +58,25 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
 
   Widget buildBody() {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: _responsive.getWidth(16.0),
-              vertical: _responsive.getHeight(32.0)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  TVSeriesInformationBox(document: "batman"),
-                  Expanded(child: Container()),
-                  TVSeriesInformationBox(document: "theNewAdventuresOfBatman"),
-                  Expanded(child: Container()),
-                  TVSeriesInformationBox(document: "theAnimatedSeries"),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    TVSeriesInformationBox(document: "theNewBatmanAdventures"),
-                    Expanded(child: Container()),
-                    TVSeriesInformationBox(document: "batmanBeyond"),
-                    Expanded(child: Container()),
-                    TVSeriesInformationBox(document: "birdsOfPrey"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    TVSeriesInformationBox(document: "theBatman"),
-                    Expanded(child: Container()),
-                    TVSeriesInformationBox(document: "theBraveAndTheBold"),
-                    Expanded(child: Container()),
-                    TVSeriesInformationBox(document: "beware"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    TVSeriesInformationBox(document: "gotham"),
-                    Expanded(child: Container()),
-                    TVSeriesInformationBox(document: "batwoman"),
-                    Expanded(child: Container()),
-                    Container(
-                      height: _responsive.getHeight(150.0),
-                      width: _responsive.getHeight(150.0),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+      child: StreamBuilder(
+        stream: Firestore.instance.collection('tvSeries').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+                child: Text(
+              'Carregando as séries de TV',
+              style: BatFonts.createTitle(color: Colors.yellow),
+            ));
+          }
+          return GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (BuildContext context, int index) {
+              return Image.network(snapshot.data.documents[index]['cover']);
+            },
+            itemCount: snapshot.data.documents.length,
+          );
+        },
       ),
     );
   }

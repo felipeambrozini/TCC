@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
@@ -57,140 +58,25 @@ class _GamesPageState extends State<GamesPage> {
 
   Widget buildBody() {
     return Expanded(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: _responsive.getWidth(16.0),
-              vertical: _responsive.getHeight(32.0)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  GamesInformationBox(document: "batman1986"),
-                  Expanded(child: Container()),
-                  GamesInformationBox(document: "theCapedCrusader"),
-                  Expanded(child: Container()),
-                  GamesInformationBox(document: "batman1989"),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "batman1990"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "batman1992"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "returnOfTheJoker"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "batmanReturns"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "theAnimatedSeries"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(
-                        document: "theAdventuresofBatman&Robin"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "batmanForeverArcade"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "batman&Robin"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(
-                        document: "batmanBeyondReturnoftheJoker"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "chaosinGotham"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "gothamCityRacer"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "vengeance"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "darkTomorrow"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "riseofSinTzu"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "begins"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "lego"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "arkhamAsylum"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "braveAndTheBold"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "arkhamCity"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "lego2"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "arkhamOrigins"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "arkhamOriginsBlackgate"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "batman"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "lego3"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: Row(
-                  children: [
-                    GamesInformationBox(document: "arkhamKnight"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "arkhamVR"),
-                    Expanded(child: Container()),
-                    GamesInformationBox(document: "theTelltaleSeries"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-                child: GamesInformationBox(document: "theEnemyWithin"),
-              ),
-            ],
-          ),
-        ),
+      child: StreamBuilder(
+        stream: Firestore.instance.collection('games').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+                child: Text(
+              'Carregando os jogos',
+              style: BatFonts.createTitle(color: Colors.yellow),
+            ));
+          }
+          return GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (BuildContext context, int index) {
+              return Image.network(snapshot.data.documents[index]['cover']);
+            },
+            itemCount: snapshot.data.documents.length,
+          );
+        },
       ),
     );
   }

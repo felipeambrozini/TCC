@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
@@ -55,15 +56,23 @@ class _BatmanPageState extends State<BatmanPage> {
   }
 
   Widget buildBody() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 3),
-          child: CharactersInformationBox(
-              collection: "batman", document: "batman"),
-        ),
-      ],
+    return Expanded(
+      child: StreamBuilder(
+        stream: Firestore.instance.collection('batman').snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: Text('Carregando Batman'));
+          }
+          return GridView.builder(
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
+            itemBuilder: (BuildContext context, int index) {
+              return Image.network(snapshot.data.documents[index]['image']);
+            },
+            itemCount: snapshot.data.documents.length,
+          );
+        },
+      ),
     );
   }
 }
