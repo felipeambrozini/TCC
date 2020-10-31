@@ -59,7 +59,10 @@ class _VillainsPageState extends State<VillainsPage> {
   Widget buildBody() {
     return Expanded(
       child: StreamBuilder(
-        stream: Firestore.instance.collection('vilians').snapshots(),
+        stream: Firestore.instance
+            .collection('vilians')
+            .orderBy('alterEgo')
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -69,10 +72,15 @@ class _VillainsPageState extends State<VillainsPage> {
             ));
           }
           return GridView.builder(
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: _responsive.getWidth(16.0),
+                mainAxisSpacing: _responsive.getHeight(32.0)),
             itemBuilder: (BuildContext context, int index) {
-              return Image.network(snapshot.data.documents[index]['image']);
+              return CharactersInformationBox(
+                responsive: _responsive,
+                snapshot: snapshot.data.documents[index],
+              );
             },
             itemCount: snapshot.data.documents.length,
           );

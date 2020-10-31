@@ -64,10 +64,16 @@ class _BatmanPageState extends State<BatmanPage> {
             return Center(child: Text('Carregando Batman'));
           }
           return GridView.builder(
+            padding: EdgeInsets.symmetric(
+                horizontal: _responsive.getWidth(32.0),
+                vertical: _responsive.getHeight(64.0)),
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
             itemBuilder: (BuildContext context, int index) {
-              return Image.network(snapshot.data.documents[index]['image']);
+              return CharactersInformationBox(
+                responsive: _responsive,
+                snapshot: snapshot.data.documents[index],
+              );
             },
             itemCount: snapshot.data.documents.length,
           );

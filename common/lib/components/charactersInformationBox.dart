@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 class CharactersInformationBox extends StatelessWidget {
-  final AsyncSnapshot snapshot;
+  final DocumentSnapshot snapshot;
   final BatResponsive responsive;
 
   CharactersInformationBox(
@@ -19,7 +20,7 @@ class CharactersInformationBox extends StatelessWidget {
         width: responsive.getHeight(150.0),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(snapshot.data.documents['image']),
+            image: NetworkImage(snapshot.data['image']),
             fit: BoxFit.fill,
           ),
         ),
@@ -59,9 +60,9 @@ class CharactersInformationBox extends StatelessWidget {
                               padding: EdgeInsets.only(
                                   bottom: responsive.getHeight(16.0)),
                               child: Image.network(
-                                snapshot.data.documents['image'],
-                                height: responsive.getHeight(200.0),
-                                width: responsive.getHeight(200.0),
+                                snapshot.data['image'],
+                                height: responsive.getHeight(150.0),
+                                width: responsive.getHeight(150.0),
                               ),
                             ),
                           ),
@@ -73,7 +74,7 @@ class CharactersInformationBox extends StatelessWidget {
                                     color: Colors.black, fontSize: BatFonts.t2),
                               ),
                               Text(
-                                snapshot.data.documents["name"],
+                                snapshot.data["name"],
                                 style: BatFonts.createParagraph(
                                     color: Colors.black),
                                 textAlign: TextAlign.justify,
@@ -82,23 +83,30 @@ class CharactersInformationBox extends StatelessWidget {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                top: responsive.getHeight(16.0)),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Alter ego: ",
-                                  style: BatFonts.createTitle(
-                                      color: Colors.black,
-                                      fontSize: BatFonts.t2),
-                                ),
-                                Text(
-                                  snapshot.data.documents["alterEgo"],
-                                  style: BatFonts.createParagraph(
-                                      color: Colors.black),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
+                                top: responsive.getHeight(
+                                    snapshot.data["name"] ==
+                                            snapshot.data["alterEgo"]
+                                        ? 0.0
+                                        : 16.0)),
+                            child: snapshot.data["name"] ==
+                                    snapshot.data["alterEgo"]
+                                ? Container()
+                                : Row(
+                                    children: [
+                                      Text(
+                                        "Alter ego: ",
+                                        style: BatFonts.createTitle(
+                                            color: Colors.black,
+                                            fontSize: BatFonts.t2),
+                                      ),
+                                      Text(
+                                        snapshot.data["alterEgo"],
+                                        style: BatFonts.createParagraph(
+                                            color: Colors.black),
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ],
+                                  ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
@@ -113,7 +121,7 @@ class CharactersInformationBox extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    snapshot.data.documents["creator"],
+                                    snapshot.data["creator"],
                                     style: BatFonts.createParagraph(
                                       color: Colors.black,
                                     ),
@@ -136,7 +144,7 @@ class CharactersInformationBox extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    snapshot.data.documents["firstAparation"],
+                                    snapshot.data["firstAparation"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                   ),
@@ -157,7 +165,7 @@ class CharactersInformationBox extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    snapshot.data.documents["biography"],
+                                    snapshot.data["biography"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,

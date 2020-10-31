@@ -2,46 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class TVSeriesInformationBox extends StatefulWidget {
-  final String document;
+class TVSeriesInformationBox extends StatelessWidget {
+  final DocumentSnapshot snapshot;
+  final BatResponsive responsive;
 
-  const TVSeriesInformationBox({this.document});
-  @override
-  _TVSeriesInformationBoxState createState() => _TVSeriesInformationBoxState();
-}
-
-class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
-  BatResponsive _responsive;
-  dynamic data;
-
-  Future<dynamic> getData() async {
-    final DocumentReference document =
-        Firestore.instance.collection("tvSeries").document(widget.document);
-
-    await document.get().then<dynamic>((DocumentSnapshot snapshot) async {
-      setState(() {
-        data = snapshot.data;
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _responsive = BatResponsive();
-    getData();
-  }
+  TVSeriesInformationBox({this.snapshot, @required this.responsive});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: buildBottomSheet,
+      onTap: () {
+        buildBottomSheet(context);
+      },
       child: Container(
-        height: _responsive.getHeight(150.0),
-        width: _responsive.getHeight(150.0),
+        height: responsive.getHeight(150.0),
+        width: responsive.getHeight(150.0),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(data['cover']),
+            image: NetworkImage(snapshot.data['cover']),
             fit: BoxFit.fill,
           ),
         ),
@@ -49,21 +27,21 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
     );
   }
 
-  buildBottomSheet() {
+  buildBottomSheet(BuildContext context) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         builder: (context) {
           return Container(
-              margin: EdgeInsets.only(top: _responsive.getHeight(128.0)),
+              margin: EdgeInsets.only(top: responsive.getHeight(128.0)),
               padding:
-                  EdgeInsets.symmetric(horizontal: _responsive.getWidth(16.0)),
+                  EdgeInsets.symmetric(horizontal: responsive.getWidth(16.0)),
               decoration: BoxDecoration(
                   color: Colors.yellow,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(_responsive.getWidth(20.0)),
-                    topRight: Radius.circular(_responsive.getWidth(20.0)),
+                    topLeft: Radius.circular(responsive.getWidth(20.0)),
+                    topRight: Radius.circular(responsive.getWidth(20.0)),
                   )),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,11 +57,11 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                           Center(
                             child: Padding(
                               padding: EdgeInsets.only(
-                                  bottom: _responsive.getHeight(16.0)),
+                                  bottom: responsive.getHeight(16.0)),
                               child: Image.network(
-                                data['cover'],
-                                height: _responsive.getHeight(200.0),
-                                width: _responsive.getHeight(200.0),
+                                snapshot.data['cover'],
+                                height: responsive.getHeight(200.0),
+                                width: responsive.getHeight(200.0),
                               ),
                             ),
                           ),
@@ -96,7 +74,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                               ),
                               Expanded(
                                 child: Text(
-                                  data["title"],
+                                  snapshot.data["title"],
                                   style: BatFonts.createParagraph(
                                       color: Colors.black),
                                 ),
@@ -105,7 +83,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
+                                top: responsive.getHeight(16.0)),
                             child: Row(
                               children: [
                                 Text(
@@ -116,7 +94,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    data["creator"],
+                                    snapshot.data["creator"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,
@@ -127,7 +105,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
+                                top: responsive.getHeight(16.0)),
                             child: Row(
                               children: [
                                 Text(
@@ -138,7 +116,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    data["cast"],
+                                    snapshot.data["cast"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                   ),
@@ -148,7 +126,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
+                                top: responsive.getHeight(16.0)),
                             child: Row(
                               children: [
                                 Text(
@@ -158,7 +136,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                                       fontSize: BatFonts.t2),
                                 ),
                                 Text(
-                                  data["exhibitionYears"],
+                                  snapshot.data["exhibitionYears"],
                                   style: BatFonts.createParagraph(
                                       color: Colors.black),
                                 ),
@@ -167,7 +145,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
-                                vertical: _responsive.getHeight(16.0)),
+                                vertical: responsive.getHeight(16.0)),
                             child: Row(
                               children: [
                                 Text(
@@ -178,7 +156,7 @@ class _TVSeriesInformationBoxState extends State<TVSeriesInformationBox> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    data["synopsis"],
+                                    snapshot.data["synopsis"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,

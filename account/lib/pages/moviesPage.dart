@@ -59,7 +59,10 @@ class _MoviesPageState extends State<MoviesPage> {
   Widget buildBody() {
     return Expanded(
       child: StreamBuilder(
-        stream: Firestore.instance.collection('movies').snapshots(),
+        stream: Firestore.instance
+            .collection('movies')
+            .orderBy('releaseYear')
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -69,10 +72,14 @@ class _MoviesPageState extends State<MoviesPage> {
             ));
           }
           return GridView.builder(
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: _responsive.getWidth(16.0),
+                mainAxisSpacing: _responsive.getHeight(32.0)),
             itemBuilder: (BuildContext context, int index) {
-              return Image.network(snapshot.data.documents[index]['cover']);
+              return MoviesInformationBox(
+                  responsive: _responsive,
+                  snapshot: snapshot.data.documents[index]);
             },
             itemCount: snapshot.data.documents.length,
           );
