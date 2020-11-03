@@ -28,28 +28,30 @@ class _HQsPageState extends State<HQsPage> {
   Widget buildHQsPage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: _responsive.getHeight(64.0),
-          width: MediaQuery.of(context).size.width,
-          child: AppBar(
-            backgroundColor: Colors.yellow,
-            centerTitle: true,
-            title: Text(
-              "Histórias em Quadrinhos",
-              style: BatFonts.createTitle(color: Colors.black),
-            ),
-            leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-          ),
+      children: [buildTop()],
+    );
+  }
+
+  Widget buildTop() {
+    return Container(
+      height: _responsive.getHeight(64.0),
+      width: MediaQuery.of(context).size.width,
+      child: AppBar(
+        backgroundColor: Colors.yellow,
+        centerTitle: true,
+        title: Text(
+          "Histórias em Quadrinhos",
+          style: BatFonts.createTitle(color: Colors.black),
         ),
-      ],
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+      ),
     );
   }
 }

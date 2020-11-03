@@ -9,4 +9,5 @@ export 'pages/hQsPage.dart';
 export 'pages/moviesPage.dart';
 export 'pages/gamesPage.dart';
 export 'pages/tvSeriesPage.dart';
-
+export 'pages/personalInformationPage.dart';
+export 'pages/aboutPage.dart';

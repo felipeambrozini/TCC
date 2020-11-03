@@ -63,10 +63,13 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-        backgroundColor: Colors.black,
-        body: SafeArea(child: buildWelcomePage()));
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+          appBar: BatAppBar(blackFont: true, color: Colors.yellow),
+          backgroundColor: Colors.black,
+          body: SafeArea(child: buildWelcomePage())),
+    );
   }
 
   Widget buildWelcomePage() {

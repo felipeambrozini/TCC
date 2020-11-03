@@ -31,14 +31,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: Theme(
-          data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
-          child: BatDrawer()),
-      body: SafeArea(child: buildHomePage()),
-      backgroundColor: Colors.black,
-      appBar: BatAppBar(blackFont: true, color: Colors.yellow),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: Theme(
+            data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+            child: BatDrawer()),
+        body: SafeArea(child: buildHomePage()),
+        backgroundColor: Colors.black,
+        appBar: BatAppBar(blackFont: true, color: Colors.yellow),
+      ),
     );
   }
 
@@ -52,15 +55,15 @@ class _HomePageState extends State<HomePage> {
   Widget buildTop() {
     return Padding(
         padding: EdgeInsets.symmetric(
-            vertical: _responsive.getHeight(64.0),
+            vertical: _responsive.getHeight(32.0),
             horizontal: _responsive.getWidth(16.0)),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               "Bem vindo ao BatPédia, " + "\n" + _user.name,
               style: BatFonts.createTitle(fontSize: BatFonts.t2),
             ),
-            Expanded(child: Container()),
             GestureDetector(
                 onTap: () {
                   _scaffoldKey.currentState.openDrawer();
@@ -90,27 +93,23 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildCircularAvatar() {
     return Container(
-      height: _responsive.getHeight(80.0),
-      width: _responsive.getWidth(80.0),
-      child: Center(
-        child: Text(
-          getInitials(),
-          style: BatFonts.createTitle(
-            fontSize: BatFonts.t2,
-            color: Colors.black,
-          ),
-          textAlign: TextAlign.center,
+        height: _responsive.getHeight(64.0),
+        width: _responsive.getWidth(64.0),
+        child: Center(
+          child: Text(getInitials(),
+              style: BatFonts.createTitle(
+                  fontSize: BatFonts.t2, color: Colors.black),
+              textAlign: TextAlign.center),
         ),
-      ),
-      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
-    );
+        decoration:
+            BoxDecoration(shape: BoxShape.circle, color: Colors.yellow));
   }
 
   Widget buildMenu() {
     return Expanded(
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _responsive.getWidth(32.0)),
+          padding: EdgeInsets.symmetric(horizontal: _responsive.getWidth(16.0)),
           child: Column(
             children: [
               GestureDetector(

@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:login/login.dart';
 import 'package:main/pages/welcomePage.dart';
+import 'package:account/account.dart';
 
 class BatDrawer extends StatefulWidget {
   @override
@@ -11,18 +12,17 @@ class BatDrawer extends StatefulWidget {
 class _BatDrawerState extends State<BatDrawer> {
   BatResponsive _responsive;
   Auth _auth;
-  BatUser _user;
 
   List<Map> optionsList = [
     {
       'icon': Icons.person,
       'label': 'Informações Pessoais',
-      'routeName': null,
+      'routeName': PersonalInformationPage.tag,
     },
     {
       'icon': Icons.info,
       'label': 'Sobre o aplicativo',
-      'routeName': null,
+      'routeName': AboutPage.tag,
     },
   ];
 
@@ -31,15 +31,8 @@ class _BatDrawerState extends State<BatDrawer> {
     super.initState();
     _responsive = BatResponsive();
     _auth = Auth();
-    _user = BatUser();
-    Auth.getUserLocal().then(_onGetUserLocalSuccess);
   }
 
-  void _onGetUserLocalSuccess(BatUser user) {
-    setState(() {
-      _user = user;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +41,7 @@ class _BatDrawerState extends State<BatDrawer> {
       child: Drawer(
         elevation: 0.0,
         child: Container(
-          padding: EdgeInsets.only(top: _responsive.getHeight(40.0)),
+          padding: EdgeInsets.only(top: _responsive.getHeight(64.0)),
           decoration: BoxDecoration(
             color: Colors.yellow,
             borderRadius: BorderRadius.only(
@@ -59,7 +52,6 @@ class _BatDrawerState extends State<BatDrawer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              buildTop(),
               buildList(),
               buildExit(),
             ],
@@ -68,36 +60,6 @@ class _BatDrawerState extends State<BatDrawer> {
       ),
     );
   }
-
-  Widget buildTop() => Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(
-          vertical: _responsive.getHeight(32.0),
-        ),
-        decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(color: Colors.black))),
-        child: Column(
-          children: [
-            Text(
-              _user.name,
-              style: BatFonts.createTitle(
-                color: Colors.black,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: _responsive.getHeight(16.0),
-                  right: _responsive.getWidth(32.0)),
-              child: Text(
-                _user.email,
-                style: BatFonts.createTitle(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
 
   Widget buildList() => Expanded(
         child: ListView.builder(
@@ -123,12 +85,8 @@ class _BatDrawerState extends State<BatDrawer> {
             ),
             Padding(
               padding: EdgeInsets.only(left: _responsive.getWidth(20.0)),
-              child: Text(
-                item['label'],
-                style: BatFonts.createTitle(
-                  color: Colors.black,
-                ),
-              ),
+              child: Text(item['label'],
+                  style: BatFonts.createTitle(color: Colors.black)),
             )
           ],
         ),
@@ -136,13 +94,11 @@ class _BatDrawerState extends State<BatDrawer> {
 
   Widget buildExit() => Padding(
         padding: EdgeInsets.only(
-          left: _responsive.getWidth(20.0),
-          bottom: _responsive.getHeight(30.0),
-        ),
+            left: _responsive.getWidth(20.0),
+            bottom: _responsive.getHeight(30.0)),
         child: GestureDetector(
           onTap: () async {
             await _auth.signOut();
-            FocusScope.of(context).unfocus();
             Navigator.of(context)
                 .popUntil(ModalRoute.withName(WelcomePage.tag));
           },

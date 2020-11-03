@@ -21,12 +21,12 @@ class _BatmanPageState extends State<BatmanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: SafeArea(child: buildBatmanage()),
+      body: SafeArea(child: buildBatmanPage()),
       backgroundColor: Colors.black,
     );
   }
 
-  Widget buildBatmanage() {
+  Widget buildBatmanPage() {
     return Column(
       children: [buildTop(), buildBody()],
     );
@@ -61,12 +61,14 @@ class _BatmanPageState extends State<BatmanPage> {
         stream: Firestore.instance.collection('batman').snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: Text('Carregando Batman'));
+            return Center(
+                child: Text('Carregando Batman',
+                    style: BatFonts.createTitle(color: Colors.yellow)));
           }
           return GridView.builder(
             padding: EdgeInsets.symmetric(
-                horizontal: _responsive.getWidth(32.0),
-                vertical: _responsive.getHeight(64.0)),
+              horizontal: _responsive.getWidth(16.0),
+                vertical: _responsive.getHeight(32.0)),
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
             itemBuilder: (BuildContext context, int index) {

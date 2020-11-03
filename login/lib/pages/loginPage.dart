@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildLoginButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(160.0)),
+      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(48.0)),
       child: Row(
         children: [
           Expanded(

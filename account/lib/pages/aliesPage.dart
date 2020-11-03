@@ -59,16 +59,20 @@ class _AliesPageState extends State<AliesPage> {
   Widget buildBody() {
     return Expanded(
       child: StreamBuilder(
-        stream:
-            Firestore.instance.collection('alies').orderBy('name').snapshots(),
+        stream: Firestore.instance
+            .collection('alies')
+            .orderBy('alterEgo')
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: Text('Carregando os aliados'));
+            return Center(
+                child: Text('Carregando os aliados',
+                    style: BatFonts.createTitle(color: Colors.yellow)));
           }
           return GridView.builder(
             padding: EdgeInsets.symmetric(
-                horizontal: _responsive.getWidth(32.0),
-                vertical: _responsive.getHeight(64.0)),
+                horizontal: _responsive.getWidth(16.0),
+                vertical: _responsive.getHeight(32.0)),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: _responsive.getWidth(16.0),

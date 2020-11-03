@@ -5,10 +5,10 @@ import 'package:account/account.dart';
 import 'pages/splashScreen.dart';
 import 'pages/welcomePage.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     runApp(BatPedia());
   });
 }
@@ -20,47 +20,27 @@ class BatPedia extends StatelessWidget {
       statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.dark,
     ));
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'BatPédia',
+      home: SplashScreen(),
+      color: Colors.yellow,
+      theme: ThemeData.dark(),
+      routes: {
+        WelcomePage.tag: (context) => WelcomePage(),
+        LoginPage.tag: (context) => LoginPage(),
+        RegisterPage.tag: (context) => RegisterPage(),
+        HomePage.tag: (context) => HomePage(),
+        BatmanPage.tag: (context) => BatmanPage(),
+        AliesPage.tag: (context) => AliesPage(),
+        VillainsPage.tag: (context) => VillainsPage(),
+        HQsPage.tag: (context) => HQsPage(),
+        MoviesPage.tag: (context) => MoviesPage(),
+        TVSeriesPage.tag: (context) => TVSeriesPage(),
+        GamesPage.tag: (context) => GamesPage(),
+        PersonalInformationPage.tag: (context) => PersonalInformationPage(),
+        AboutPage.tag: (context) => AboutPage()
       },
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        builder: (context, child) {
-          return ScrollConfiguration(
-            behavior: MyBehavior(),
-            child: child,
-          );
-        },
-        title: 'BatPedia',
-        color: Colors.yellow,
-        theme: ThemeData.dark(),
-        home: SplashScreen(),
-        routes: {
-          WelcomePage.tag: (context) => WelcomePage(),
-          LoginPage.tag: (context) => LoginPage(),
-          RegisterPage.tag: (context) => RegisterPage(),
-          HomePage.tag: (context) => HomePage(),
-          BatmanPage.tag: (context) => BatmanPage(),
-          AliesPage.tag: (context) => AliesPage(),
-          VillainsPage.tag: (context) => VillainsPage(),
-          HQsPage.tag: (context) => HQsPage(),
-          MoviesPage.tag: (context) => MoviesPage(),
-          TVSeriesPage.tag: (context) => TVSeriesPage(),
-          GamesPage.tag: (context) => GamesPage(),
-        },
-      ),
     );
-  }
-}
-
-class MyBehavior extends ScrollBehavior {
-  Widget buildMyBehavior(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child;
   }
 }

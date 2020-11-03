@@ -72,6 +72,9 @@ class _MoviesPageState extends State<MoviesPage> {
             ));
           }
           return GridView.builder(
+            padding: EdgeInsets.symmetric(
+                horizontal: _responsive.getWidth(16.0),
+                vertical: _responsive.getHeight(32.0)),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: _responsive.getWidth(16.0),
