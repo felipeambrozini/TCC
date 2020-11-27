@@ -20,8 +20,7 @@ class CharactersInformationBox extends StatelessWidget {
         width: responsive.getHeight(150.0),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(snapshot.data['image']),
-            fit: BoxFit.fill,
+            image: NetworkImage(snapshot.data['image'])
           ),
         ),
       ),
@@ -47,9 +46,7 @@ class CharactersInformationBox extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ScrollIcon(
-                    color: Colors.black,
-                  ),
+                  ScrollIcon(color: Colors.black, responsive: responsive),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(

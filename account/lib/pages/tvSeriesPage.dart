@@ -10,11 +10,14 @@ class TVSeriesPage extends StatefulWidget {
 
 class _TVSeriesPageState extends State<TVSeriesPage> {
   BatResponsive _responsive;
+  TextEditingController textController;
+  String search;
 
   @override
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+    textController = TextEditingController();
   }
 
   @override
@@ -29,7 +32,20 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
   Widget buildTVSeriesPage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [buildTop(), buildBody()],
+      children: [
+        buildTop(),
+        SearchBox(
+          controller: textController,
+          responsive: _responsive,
+          hintText: "Pesquise uma série de TV do Batman",
+          onChanged: (val) {
+            setState(() {
+              search = val;
+            });
+          },
+        ),
+        buildBody()
+      ],
     );
   }
 
@@ -59,18 +75,32 @@ class _TVSeriesPageState extends State<TVSeriesPage> {
   Widget buildBody() {
     return Expanded(
       child: StreamBuilder(
-        stream: Firestore.instance
-            .collection('tvSeries')
-            .orderBy('exhibitionYears')
-            .snapshots(),
+        stream: (search != "" && search != null)
+            ? Firestore.instance
+                .collection('tvSeries')
+                .where("keySearch", arrayContains: search)
+                .orderBy("exhibitionYears")
+                .snapshots()
+            : Firestore.instance
+                .collection("tvSeries")
+                .orderBy("exhibitionYears")
+                .snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+                child: Text(
+              'Carregando as séries de TV...',
+              style: BatFonts.createTitle(),
+            ));
+          }
           if (!snapshot.hasData) {
             return Center(
                 child: Text(
-              'Carregando as séries de TV',
-              style: BatFonts.createTitle(color: Colors.yellow),
+              'Carregando as séries de TV...',
+              style: BatFonts.createTitle(),
             ));
           }
+
           return GridView.builder(
             padding: EdgeInsets.symmetric(
                 horizontal: _responsive.getWidth(16.0),

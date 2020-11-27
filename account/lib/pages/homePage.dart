@@ -118,10 +118,12 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: Column(
                     children: [
-                      MenuBox(asset: "assets/images/batman.jpg"),
+                      MenuBox(
+                          asset: "assets/images/batman.jpg",
+                          responsive: _responsive),
                       Padding(
                         padding:
-                            EdgeInsets.only(top: _responsive.getHeight(16.0)),
+                            EdgeInsets.only(top: _responsive.getHeight(32.0)),
                         child: Text(
                           "Batman",
                           style: BatFonts.createTitle(fontSize: BatFonts.t2),
@@ -139,15 +141,12 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Column(
                         children: [
-                          MenuBox(asset: "assets/images/batFamily.png"),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
-                            child: Text(
-                              "Aliados",
-                              style:
-                                  BatFonts.createTitle(fontSize: BatFonts.t2),
-                            ),
+                          MenuBox(
+                              asset: "assets/images/batFamily.png",
+                              responsive: _responsive),
+                          Text(
+                            "Aliados",
+                            style: BatFonts.createTitle(fontSize: BatFonts.t2),
                           )
                         ],
                       ),
@@ -159,15 +158,13 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: Column(
                           children: [
-                            MenuBox(asset: "assets/images/vilians.png"),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: _responsive.getHeight(16.0)),
-                              child: Text(
-                                "Vilões",
-                                style:
-                                    BatFonts.createTitle(fontSize: BatFonts.t2),
-                              ),
+                            MenuBox(
+                                asset: "assets/images/vilians.png",
+                                responsive: _responsive),
+                            Text(
+                              "Vilões",
+                              style:
+                                  BatFonts.createTitle(fontSize: BatFonts.t2),
                             )
                           ],
                         )),
@@ -180,19 +177,16 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, HQsPage.tag);
+                        Navigator.pushNamed(context, ComicsPage.tag);
                       },
                       child: Column(
                         children: [
-                          MenuBox(asset: "assets/images/hqs.png"),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: _responsive.getHeight(16.0)),
-                            child: Text(
-                              "HQs",
-                              style:
-                                  BatFonts.createTitle(fontSize: BatFonts.t2),
-                            ),
+                          MenuBox(
+                              asset: "assets/images/comics.png",
+                              responsive: _responsive),
+                          Text(
+                            "HQs",
+                            style: BatFonts.createTitle(fontSize: BatFonts.t2),
                           )
                         ],
                       ),
@@ -204,15 +198,13 @@ class _HomePageState extends State<HomePage> {
                         },
                         child: Column(
                           children: [
-                            MenuBox(asset: "assets/images/movies.png"),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: _responsive.getHeight(16.0)),
-                              child: Text(
-                                "Filmes",
-                                style:
-                                    BatFonts.createTitle(fontSize: BatFonts.t2),
-                              ),
+                            MenuBox(
+                                asset: "assets/images/movies.png",
+                                responsive: _responsive),
+                            Text(
+                              "Filmes",
+                              style:
+                                  BatFonts.createTitle(fontSize: BatFonts.t2),
                             )
                           ],
                         )),
@@ -230,15 +222,12 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Navigator.pushNamed(context, TVSeriesPage.tag);
                             },
-                            child:
-                                MenuBox(asset: "assets/images/seriesTv.png")),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                          child: Text(
-                            "Séries de TV",
-                            style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                          ),
+                            child: MenuBox(
+                                asset: "assets/images/TVseries.png",
+                                responsive: _responsive)),
+                        Text(
+                          "Séries de TV",
+                          style: BatFonts.createTitle(fontSize: BatFonts.t2),
                         )
                       ],
                     ),
@@ -249,14 +238,12 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Navigator.pushNamed(context, GamesPage.tag);
                             },
-                            child: MenuBox(asset: "assets/images/games.png")),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(top: _responsive.getHeight(16.0)),
-                          child: Text(
-                            "Jogos",
-                            style: BatFonts.createTitle(fontSize: BatFonts.t2),
-                          ),
+                            child: MenuBox(
+                                asset: "assets/images/games.png",
+                                responsive: _responsive)),
+                        Text(
+                          "Jogos",
+                          style: BatFonts.createTitle(fontSize: BatFonts.t2),
                         )
                       ],
                     ),

@@ -50,6 +50,7 @@ class BatFonts {
         height: height,
         letterSpacing: letterSpacing,
         decoration: decoration,
+        fontWeight: FontWeight.w600
       );
 
   static void setResponsive() {

@@ -10,11 +10,14 @@ class VillainsPage extends StatefulWidget {
 
 class _VillainsPageState extends State<VillainsPage> {
   BatResponsive _responsive;
+  TextEditingController controller;
+  String name;
 
   @override
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+    controller = TextEditingController();
   }
 
   @override
@@ -29,7 +32,20 @@ class _VillainsPageState extends State<VillainsPage> {
   Widget buildAliesPage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [buildTop(), buildBody()],
+      children: [
+        buildTop(),
+        SearchBox(
+          controller: controller,
+          responsive: _responsive,
+          hintText: "Pesquise um vilão do Batman",
+          onChanged: (val) {
+            setState(() {
+              name = val;
+            });
+          },
+        ),
+        buildBody()
+      ],
     );
   }
 
@@ -59,22 +75,33 @@ class _VillainsPageState extends State<VillainsPage> {
   Widget buildBody() {
     return Expanded(
       child: StreamBuilder(
-        stream: Firestore.instance
-            .collection('vilians')
-            .orderBy('alterEgo')
-            .snapshots(),
+        stream: (name != "" && name != null)
+            ? Firestore.instance
+                .collection('vilians')
+                .where("keySearch", arrayContains: name)
+                .snapshots()
+            : Firestore.instance
+                .collection("vilians")
+                .orderBy("alterEgo")
+                .snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+                child: Text(
+              'Erro em carregar os vilões.',
+              style: BatFonts.createTitle(),
+            ));
+          }
           if (!snapshot.hasData) {
             return Center(
                 child: Text(
-              'Carregando os vilões',
-              style: BatFonts.createTitle(color: Colors.yellow),
+              'Carregando os vilões...',
+              style: BatFonts.createTitle(),
             ));
           }
           return GridView.builder(
-            padding: EdgeInsets.symmetric(
-                horizontal: _responsive.getWidth(16.0),
-                vertical: _responsive.getHeight(32.0)),
+            padding:
+                EdgeInsets.symmetric(horizontal: _responsive.getWidth(16.0)),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: _responsive.getWidth(16.0),

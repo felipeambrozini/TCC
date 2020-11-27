@@ -15,7 +15,7 @@ dependencies:
 
 
 #Package:
-  cupertino_icons: ^0.1.3
+  cupertino_icons: ^1.0.0
   cloud_firestore: ^0.13.7
 
 #Modules:

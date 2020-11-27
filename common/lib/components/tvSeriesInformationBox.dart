@@ -18,10 +18,7 @@ class TVSeriesInformationBox extends StatelessWidget {
         height: responsive.getHeight(150.0),
         width: responsive.getHeight(150.0),
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(snapshot.data['cover']),
-            fit: BoxFit.fill,
-          ),
+          image: DecorationImage(image: NetworkImage(snapshot.data['cover'])),
         ),
       ),
     );
@@ -46,9 +43,7 @@ class TVSeriesInformationBox extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ScrollIcon(
-                    color: Colors.black,
-                  ),
+                  ScrollIcon(color: Colors.black, responsive: responsive),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
@@ -87,14 +82,14 @@ class TVSeriesInformationBox extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "Showrunner : ",
+                                  "Showrunner: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
                                 Expanded(
                                   child: Text(
-                                    snapshot.data["creator"],
+                                    snapshot.data["showrunner"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,
@@ -109,7 +104,7 @@ class TVSeriesInformationBox extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "Elenco: ",
+                                  "Elenco Principal: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:login/login.dart';
 import 'package:account/account.dart';
+import 'package:main/utils/batTheme.dart';
 import 'pages/splashScreen.dart';
 import 'pages/welcomePage.dart';
 
@@ -25,7 +26,7 @@ class BatPedia extends StatelessWidget {
       title: 'BatPédia',
       home: SplashScreen(),
       color: Colors.yellow,
-      theme: ThemeData.dark(),
+      theme: BatTheme.batTheme,
       routes: {
         WelcomePage.tag: (context) => WelcomePage(),
         LoginPage.tag: (context) => LoginPage(),
@@ -34,7 +35,7 @@ class BatPedia extends StatelessWidget {
         BatmanPage.tag: (context) => BatmanPage(),
         AliesPage.tag: (context) => AliesPage(),
         VillainsPage.tag: (context) => VillainsPage(),
-        HQsPage.tag: (context) => HQsPage(),
+        ComicsPage.tag: (context) => ComicsPage(),
         MoviesPage.tag: (context) => MoviesPage(),
         TVSeriesPage.tag: (context) => TVSeriesPage(),
         GamesPage.tag: (context) => GamesPage(),

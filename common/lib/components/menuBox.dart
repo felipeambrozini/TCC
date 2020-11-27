@@ -1,33 +1,20 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class MenuBox extends StatefulWidget {
+class MenuBox extends StatelessWidget {
   final String asset;
+  final BatResponsive responsive;
 
-   MenuBox({@required this.asset});
-
-  @override
-  _MenuBoxState createState() => _MenuBoxState();
-}
-
-class _MenuBoxState extends State<MenuBox> {
-  BatResponsive _responsive;
-
-  @override
-  void initState() {
-    super.initState();
-    _responsive = BatResponsive();
-  }
+  MenuBox({@required this.asset, @required this.responsive});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: _responsive.getHeight(150.0),
-      width: _responsive.getHeight(150.0),
+      height: responsive.getHeight(150.0),
+      width: responsive.getHeight(150.0),
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(widget.asset),
-         fit: BoxFit.fill,
+          image: AssetImage(asset)
         ),
       ),
     );

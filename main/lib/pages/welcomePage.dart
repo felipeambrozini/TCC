@@ -19,45 +19,17 @@ class _WelcomePageState extends State<WelcomePage> {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
 
-  buildLoginPageBottomSheet() {
+  buildBottomSheet(BottomSheetType type) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         backgroundColor: Colors.transparent,
         builder: (context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setLoginState) {
-            return Container(
-                margin: EdgeInsets.only(top: _responsive.getHeight(160.0)),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(_responsive.getWidth(20.0)),
-                      topRight: Radius.circular(_responsive.getWidth(20.0)),
-                    )),
-                child: LoginPage(setLoginStatter: setLoginState));
-          });
-        });
-  }
-
-  buildRegisterPageBottomSheet() {
-    showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        builder: (context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setRegisterStatter) {
-            return Container(
-                margin: EdgeInsets.only(top: _responsive.getHeight(160.0)),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(_responsive.getWidth(20.0)),
-                      topRight: Radius.circular(_responsive.getWidth(20.0)),
-                    )),
-                child: RegisterPage(setRegisterStatter: setRegisterStatter));
-          });
+          return Container(
+              margin: EdgeInsets.only(top: _responsive.getHeight(128.0)),
+              child: type == BottomSheetType.REGISTER
+                  ? RegisterPage()
+                  : LoginPage());
         });
   }
 
@@ -76,7 +48,9 @@ class _WelcomePageState extends State<WelcomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+        Expanded(child: Container()),
         Center(child: buildLogo()),
+        Expanded(child: Container()),
         buildWelcomeMensage(),
         Expanded(child: Container()),
         buildButtons(),
@@ -85,22 +59,7 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget buildLogo() {
-    return Padding(
-      padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
-      child: Column(
-        children: [
-          Text(
-            "BatPédia",
-            style: BatFonts.createTitle(),
-          ),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(vertical: _responsive.getHeight(128.0)),
-            child: Image.asset("assets/images/batmanLogo.png"),
-          ),
-        ],
-      ),
-    );
+    return Image.asset("assets/images/batpedia.png");
   }
 
   Widget buildWelcomeMensage() {
@@ -137,15 +96,25 @@ class _WelcomePageState extends State<WelcomePage> {
           children: <Widget>[
             Expanded(
               child: BatButton(
-                onPressed: buildLoginPageBottomSheet,
-                text: 'Login',
-              ),
+                  onPressed: () {
+                    buildBottomSheet(BottomSheetType.LOGIN);
+                  },
+                  text: 'Login',
+                  responsive: _responsive,
+                  buttonColor: Colors.yellow),
             ),
             Expanded(
               child: BatButton(
-                  text: 'Cadastro', onPressed: buildRegisterPageBottomSheet),
+                  text: 'Cadastro',
+                  onPressed: () {
+                    buildBottomSheet(BottomSheetType.REGISTER);
+                  },
+                  responsive: _responsive,
+                  buttonColor: Colors.yellow),
             ),
           ],
         ),
       );
 }
+
+enum BottomSheetType { LOGIN, REGISTER }

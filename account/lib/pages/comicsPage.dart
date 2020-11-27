@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class AliesPage extends StatefulWidget {
-  static const String tag = '/account/aliesPage';
+class ComicsPage extends StatefulWidget {
+  static const String tag = '/account/ComicssPage';
   @override
-  _AliesPageState createState() => _AliesPageState();
+  _ComicsPageState createState() => _ComicsPageState();
 }
 
-class _AliesPageState extends State<AliesPage> {
+class _ComicsPageState extends State<ComicsPage> {
   BatResponsive _responsive;
   TextEditingController textController;
   String search;
@@ -24,12 +24,12 @@ class _AliesPageState extends State<AliesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BatAppBar(blackFont: true, color: Colors.yellow),
-      body: SafeArea(child: buildAliesPage()),
+      body: SafeArea(child: buildComicssPage()),
       backgroundColor: Colors.black,
     );
   }
 
-  Widget buildAliesPage() {
+  Widget buildComicssPage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,7 +37,7 @@ class _AliesPageState extends State<AliesPage> {
         SearchBox(
           controller: textController,
           responsive: _responsive,
-          hintText: "Pesquise um aliado do Batman",
+          hintText: "Pesquise uma HQ do Batman",
           onChanged: (val) {
             setState(() {
               search = val;
@@ -57,7 +57,7 @@ class _AliesPageState extends State<AliesPage> {
         backgroundColor: Colors.yellow,
         centerTitle: true,
         title: Text(
-          "Aliados",
+          "Histórias em Quadrinhos",
           style: BatFonts.createTitle(color: Colors.black),
         ),
         leading: IconButton(
@@ -77,39 +77,41 @@ class _AliesPageState extends State<AliesPage> {
       child: StreamBuilder(
         stream: (search != "" && search != null)
             ? Firestore.instance
-                .collection('alies')
+                .collection('comics')
                 .where("keySearch", arrayContains: search)
-                .orderBy("name")
+                .orderBy("releaseYear")
                 .snapshots()
             : Firestore.instance
-                .collection("alies")
-                .orderBy("name")
+                .collection("comics")
+                .orderBy("releaseYear")
                 .snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasError) {
             return Center(
                 child: Text(
-              'Erro em carregar os aliados.',
+              'Erro em carregar as história em quadrinhos.',
               style: BatFonts.createTitle(),
             ));
           }
           if (!snapshot.hasData) {
             return Center(
-                child: Text('Carregando os aliados...',
-                    style: BatFonts.createTitle()));
+                child: Text(
+              'Carregando as história em quadrinhos...',
+              style: BatFonts.createTitle(),
+            ));
           }
           return GridView.builder(
-            padding:
-                EdgeInsets.symmetric(horizontal: _responsive.getWidth(16.0)),
+            padding: EdgeInsets.symmetric(
+                horizontal: _responsive.getWidth(16.0),
+                vertical: _responsive.getHeight(32.0)),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: _responsive.getWidth(16.0),
                 mainAxisSpacing: _responsive.getHeight(32.0)),
             itemBuilder: (BuildContext context, int index) {
-              return CharactersInformationBox(
-                responsive: _responsive,
-                snapshot: snapshot.data.documents[index],
-              );
+              return ComicsInformationBox(
+                  responsive: _responsive,
+                  snapshot: snapshot.data.documents[index]);
             },
             itemCount: snapshot.data.documents.length,
           );

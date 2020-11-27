@@ -7,9 +7,6 @@ import 'package:main/pages/welcomePage.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String tag = '/login/registerPage';
-  final StateSetter setRegisterStatter;
-
-  RegisterPage({this.setRegisterStatter});
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -51,14 +48,18 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.yellow,
       body: buildRegisterPage(),
     );
   }
 
   Widget buildRegisterPage() {
     return Column(
-      children: [ScrollIcon(color: Colors.yellow), buildTop(), buildBody()],
+      children: [
+        ScrollIcon(color: Colors.black, responsive: _responsive),
+        buildTop(),
+        buildBody()
+      ],
     );
   }
 
@@ -71,17 +72,13 @@ class _RegisterPageState extends State<RegisterPage> {
           children: <Widget>[
             Text(
               'Cadastro',
-              style: BatFonts.createTitle(),
+              style: BatFonts.createTitle(color: Colors.black),
             ),
             GestureDetector(
               onTap: () => Navigator.pop(context),
               child: Container(
                 color: Colors.transparent,
-                child: Icon(
-                  Icons.close,
-                  color: Colors.yellow,
-                  size: _responsive.getWidth(32.0),
-                ),
+                child: Icon(Icons.close, color: Colors.black),
               ),
             ),
           ],
@@ -114,12 +111,16 @@ class _RegisterPageState extends State<RegisterPage> {
           Center(
             child: Image.asset(
               "assets/images/batCave.jpg",
-              height: _responsive.getHeight(400.0),
+              height: _responsive.getHeight(320.0),
             ),
           ),
-          Text(
-            "Para realizar o cadastro no BatPédia vamos precisar do seu nome, e-mail e você deve criar uma senha de 6 dígitos",
-            style: BatFonts.createParagraph(),
+          Padding(
+            padding: EdgeInsets.only(top: _responsive.getHeight(32.0)),
+            child: Text(
+                "Para realizar o cadastro no BatPédia vamos precisar do seu nome, e-mail e criar uma senha de 6 dígitos",
+                style: BatFonts.createTitle(
+                    color: Colors.black, fontSize: BatFonts.t3),
+                textAlign: TextAlign.center),
           ),
           Center(child: buildStarRegisterButton())
         ],
@@ -129,17 +130,21 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget buildStarRegisterButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(64.0)),
+      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(32.0)),
       child: Row(
         children: [
           Expanded(
-              child: BatButton(
-                  text: "Começar cadastro",
-                  onPressed: () {
-                    setState(() {
-                      _registerStep = RegisterStep.REGISTER;
-                    });
-                  }))
+            child: BatButton(
+              text: "Começar cadastro",
+              onPressed: () {
+                setState(() {
+                  _registerStep = RegisterStep.REGISTER;
+                });
+              },
+              responsive: _responsive,
+              buttonColor: Colors.black,
+            ),
+          ),
         ],
       ),
     );
@@ -169,29 +174,27 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget buildInputName() {
     return Row(
       children: [
-        Icon(
-          Icons.person,
-          color: Colors.yellow,
-        ),
+        Icon(CupertinoIcons.person, color: Colors.black),
         Padding(
-          padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
+          padding: EdgeInsets.only(left: _responsive.getWidth(16.0)),
           child: Text(
             "Nome: ",
-            style: BatFonts.createTitle(),
+            style: BatFonts.createTitle(color: Colors.black),
           ),
         ),
         Expanded(
           child: TextField(
-            cursorColor: Colors.yellow,
+            cursorColor: Colors.black,
             controller: nameController,
             keyboardType: TextInputType.name,
-            style: BatFonts.createParagraph(),
+            style: BatFonts.createParagraph(color: Colors.black),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "Digite seu nome",
-              hintStyle: BatFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(color: Colors.black),
             ),
             focusNode: nameFocusNode,
+            autofocus: true,
             onEditingComplete: () {
               _validations.validateName(nameController.text)
                   ? FocusScope.of(context).requestFocus(emailFocusNode)
@@ -213,27 +216,24 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget buildInputEmail() {
     return Row(
       children: [
-        Icon(
-          Icons.mail,
-          color: Colors.yellow,
-        ),
+        Icon(CupertinoIcons.mail, color: Colors.black),
         Padding(
-          padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
+          padding: EdgeInsets.only(left: _responsive.getWidth(16.0)),
           child: Text(
             "Email: ",
-            style: BatFonts.createTitle(),
+            style: BatFonts.createTitle(color: Colors.black),
           ),
         ),
         Expanded(
           child: TextField(
-            cursorColor: Colors.yellow,
+            cursorColor: Colors.black,
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            style: BatFonts.createParagraph(),
+            style: BatFonts.createParagraph(color: Colors.black),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "Digite seu e-mail",
-              hintStyle: BatFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(color: Colors.black),
             ),
             focusNode: emailFocusNode,
             onEditingComplete: () {
@@ -257,26 +257,23 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget buildInputPassword() {
     return Row(
       children: [
-        Icon(
-          Icons.lock,
-          color: Colors.yellow,
-        ),
+        Icon(CupertinoIcons.lock, color: Colors.black),
         Padding(
-          padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
+          padding: EdgeInsets.only(left: _responsive.getWidth(16.0)),
           child: Text(
             "Senha: ",
-            style: BatFonts.createTitle(),
+            style: BatFonts.createTitle(color: Colors.black),
           ),
         ),
         Expanded(
           child: TextField(
-            cursorColor: Colors.yellow,
-            style: BatFonts.createParagraph(),
+            cursorColor: Colors.black,
+            style: BatFonts.createParagraph(color: Colors.black),
             controller: passwordController,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "Digite seu senha",
-              hintStyle: BatFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(color: Colors.black),
             ),
             obscureText: _obscureText,
             focusNode: passwordFocusNode,
@@ -297,7 +294,7 @@ class _RegisterPageState extends State<RegisterPage> {
         IconButton(
           icon: Icon(
             _obscureText ? Icons.visibility_off : Icons.visibility,
-            color: Colors.yellow,
+            color: Colors.black,
           ),
           onPressed: () {
             setState(() {
@@ -311,11 +308,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget buildRegisterButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(64.0)),
+      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(120.0)),
       child: Row(
         children: [
           Expanded(
-            child: BatButton(text: "Realizar cadastro", onPressed: _signUp),
+            child: BatButton(
+              text: "Realizar cadastro",
+              onPressed: _signUp,
+              responsive: _responsive,
+              buttonColor: Colors.black,
+            ),
           )
         ],
       ),
@@ -341,13 +343,13 @@ class _RegisterPageState extends State<RegisterPage> {
       Flushbar(
         titleText: Text(
           'Erro',
-          style: BatFonts.createTitle(color: Colors.black),
+          style: BatFonts.createTitle(color: Colors.yellow),
         ),
         messageText: Text(
           Auth.getExceptionText(error),
-          style: BatFonts.createParagraph(color: Colors.black),
+          style: BatFonts.createParagraph(color: Colors.yellow),
         ),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.black,
         duration: Duration(seconds: 3),
       )..show(context);
     });
@@ -379,16 +381,16 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           Text(
             "Cadastro realizado com sucesso. \nBem-vindo ao BatPédia!",
-            style: BatFonts.createTitle(),
+            style: BatFonts.createTitle(color: Colors.black),
             textAlign: TextAlign.center,
           ),
-          buildReturnButton()
+          buildFinishButton()
         ],
       ),
     );
   }
 
-  Widget buildReturnButton() {
+  Widget buildFinishButton() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(64.0)),
       child: Row(
@@ -398,7 +400,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 text: "Finalizar cadastro",
                 onPressed: () {
                   Navigator.pushNamed(context, WelcomePage.tag);
-                }),
+                },
+                responsive: _responsive,
+                buttonColor: Colors.black),
           )
         ],
       ),

@@ -60,14 +60,21 @@ class _BatmanPageState extends State<BatmanPage> {
       child: StreamBuilder(
         stream: Firestore.instance.collection('batman').snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+                child: Text(
+              'Erro em carregar os filmes.',
+              style: BatFonts.createTitle(),
+            ));
+          }
           if (!snapshot.hasData) {
             return Center(
-                child: Text('Carregando Batman',
-                    style: BatFonts.createTitle(color: Colors.yellow)));
+                child: Text('Carregando Batman...',
+                    style: BatFonts.createTitle()));
           }
           return GridView.builder(
             padding: EdgeInsets.symmetric(
-              horizontal: _responsive.getWidth(16.0),
+                horizontal: _responsive.getWidth(16.0),
                 vertical: _responsive.getHeight(32.0)),
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),

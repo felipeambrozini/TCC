@@ -18,10 +18,7 @@ class GamesInformationBox extends StatelessWidget {
         height: responsive.getHeight(150.0),
         width: responsive.getHeight(150.0),
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(snapshot.data['cover']),
-            fit: BoxFit.fill,
-          ),
+          image: DecorationImage(image: NetworkImage(snapshot.data['cover'])),
         ),
       ),
     );
@@ -46,9 +43,7 @@ class GamesInformationBox extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ScrollIcon(
-                    color: Colors.black,
-                  ),
+                  ScrollIcon(color: Colors.black, responsive: responsive),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
@@ -87,7 +82,7 @@ class GamesInformationBox extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "Desenvolvedora: ",
+                                  "Desenvolvimento: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),

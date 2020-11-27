@@ -10,11 +10,14 @@ class GamesPage extends StatefulWidget {
 
 class _GamesPageState extends State<GamesPage> {
   BatResponsive _responsive;
+  TextEditingController textController;
+  String search;
 
   @override
   void initState() {
     super.initState();
     _responsive = BatResponsive();
+    textController = TextEditingController();
   }
 
   @override
@@ -29,7 +32,20 @@ class _GamesPageState extends State<GamesPage> {
   Widget buildGamesPage() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [buildTop(), buildBody()],
+      children: [
+        buildTop(),
+        SearchBox(
+          controller: textController,
+          responsive: _responsive,
+          hintText: "Pesquise um jogo do Batman",
+          onChanged: (val) {
+            setState(() {
+              search = val;
+            });
+          },
+        ),
+        buildBody()
+      ],
     );
   }
 
@@ -59,21 +75,34 @@ class _GamesPageState extends State<GamesPage> {
   Widget buildBody() {
     return Expanded(
       child: StreamBuilder(
-        stream: Firestore.instance
-            .collection('games')
-            .orderBy('releaseYear')
-            .snapshots(),
+        stream: (search != "" && search != null)
+            ? Firestore.instance
+                .collection('games')
+                .where("keySearch", arrayContains: search)
+                .orderBy("releaseYear")
+                .snapshots()
+            : Firestore.instance
+                .collection("games")
+                .orderBy("releaseYear")
+                .snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+                child: Text(
+              'Erro em carregar os jogos.',
+              style: BatFonts.createTitle(),
+            ));
+          }
           if (!snapshot.hasData) {
             return Center(
                 child: Text(
-              'Carregando os jogos',
-              style: BatFonts.createTitle(color: Colors.yellow),
+              'Carregando os jogos...',
+              style: BatFonts.createTitle(),
             ));
           }
           return GridView.builder(
             padding: EdgeInsets.symmetric(
-               horizontal: _responsive.getWidth(16.0),
+                horizontal: _responsive.getWidth(16.0),
                 vertical: _responsive.getHeight(32.0)),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,

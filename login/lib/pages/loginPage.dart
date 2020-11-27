@@ -1,14 +1,12 @@
 import 'package:common/common.dart';
 import 'package:flushbar/flushbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login/login.dart';
 import 'package:account/account.dart';
 
 class LoginPage extends StatefulWidget {
   static const String tag = '/login/loginPage';
-  final StateSetter setLoginStatter;
-
-  LoginPage({this.setLoginStatter});
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -42,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.yellow,
       body: buildLoginPage(),
     );
   }
@@ -54,9 +52,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: Column(
         children: [
-          ScrollIcon(
-            color: Colors.yellow,
-          ),
+          ScrollIcon(color: Colors.black, responsive: _responsive),
           buildTop(),
           buildBody()
         ],
@@ -72,17 +68,13 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Text(
             'Login',
-            style: BatFonts.createTitle(),
+            style: BatFonts.createTitle(color: Colors.black),
           ),
           GestureDetector(
             onTap: () => Navigator.pop(context),
             child: Container(
               color: Colors.transparent,
-              child: Icon(
-                Icons.close,
-                color: Colors.yellow,
-                size: _responsive.getWidth(32.0),
-              ),
+              child: Icon(Icons.close, color: Colors.black),
             ),
           ),
         ],
@@ -116,28 +108,26 @@ class _LoginPageState extends State<LoginPage> {
   Widget buildInputEmail() {
     return Row(
       children: [
-        Icon(
-          Icons.mail,
-          color: Colors.yellow,
-        ),
+        Icon(CupertinoIcons.mail, color: Colors.black),
         Padding(
-          padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
+          padding: EdgeInsets.only(left: _responsive.getWidth(16.0)),
           child: Text(
             "Email: ",
-            style: BatFonts.createTitle(fontSize: BatFonts.t2),
+            style: BatFonts.createTitle(
+                fontSize: BatFonts.t2, color: Colors.black),
           ),
         ),
         Expanded(
           child: TextField(
             autofocus: true,
-            cursorColor: Colors.yellow,
+            cursorColor: Colors.black,
             keyboardType: TextInputType.emailAddress,
             controller: emailController,
-            style: BatFonts.createParagraph(),
+            style: BatFonts.createParagraph(color: Colors.black),
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "Digite seu e-mail",
-              hintStyle: BatFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(color: Colors.black),
             ),
             focusNode: emailFocusNode,
             onEditingComplete: () {
@@ -161,26 +151,24 @@ class _LoginPageState extends State<LoginPage> {
   Widget buildInputPassword() {
     return Row(
       children: [
-        Icon(
-          Icons.lock,
-          color: Colors.yellow,
-        ),
+        Icon(CupertinoIcons.lock, color: Colors.black),
         Padding(
-          padding: EdgeInsets.only(left: _responsive.getWidth(8.0)),
+          padding: EdgeInsets.only(left: _responsive.getWidth(16.0)),
           child: Text(
             "Senha: ",
-            style: BatFonts.createTitle(fontSize: BatFonts.t2),
+            style: BatFonts.createTitle(
+                fontSize: BatFonts.t2, color: Colors.black),
           ),
         ),
         Expanded(
           child: TextField(
-            cursorColor: Colors.yellow,
-            style: BatFonts.createParagraph(),
+            cursorColor: Colors.black,
+            style: BatFonts.createParagraph(color: Colors.black),
             controller: passwordController,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: "Digite seu senha",
-              hintStyle: BatFonts.createParagraph(),
+              hintStyle: BatFonts.createParagraph(color: Colors.black),
             ),
             obscureText: _obscureText,
             focusNode: passwordFocusNode,
@@ -201,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
         IconButton(
           icon: Icon(
             _obscureText ? Icons.visibility_off : Icons.visibility,
-            color: Colors.yellow,
+            color: Colors.black,
           ),
           onPressed: () {
             setState(() {
@@ -217,19 +205,22 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(16.0)),
         child: Text(
           errorMsg,
-          style: BatFonts.createParagraph(
-            color: Colors.red,
-          ),
+          style: BatFonts.createParagraph(color: Colors.red),
         ),
       );
 
   Widget buildLoginButton() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(48.0)),
+      padding: EdgeInsets.symmetric(vertical: _responsive.getHeight(80.0)),
       child: Row(
         children: [
           Expanded(
-            child: BatButton(text: "Realizar login", onPressed: _signIn),
+            child: BatButton(
+              text: "Realizar login",
+              onPressed: _signIn,
+              responsive: _responsive,
+              buttonColor: Colors.black,
+            ),
           )
         ],
       ),
@@ -245,13 +236,13 @@ class _LoginPageState extends State<LoginPage> {
       Flushbar(
         titleText: Text(
           'Erro',
-          style: BatFonts.createTitle(color: Colors.black),
+          style: BatFonts.createTitle(color: Colors.yellow),
         ),
         messageText: Text(
           Auth.getExceptionText(error),
-          style: BatFonts.createParagraph(color: Colors.black),
+          style: BatFonts.createParagraph(color: Colors.yellow),
         ),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.black,
         duration: Duration(seconds: 3),
       )..show(context);
     });

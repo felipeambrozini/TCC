@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
-class MoviesInformationBox extends StatelessWidget {
+class ComicsInformationBox extends StatelessWidget {
   final DocumentSnapshot snapshot;
   final BatResponsive responsive;
 
-  MoviesInformationBox({@required this.snapshot, @required this.responsive});
+  ComicsInformationBox({this.snapshot, this.responsive});
 
   @override
   Widget build(BuildContext context) {
@@ -82,14 +82,14 @@ class MoviesInformationBox extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "Direção: ",
+                                  "História: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
                                 Expanded(
                                   child: Text(
-                                    snapshot.data["director"],
+                                    snapshot.data["screenwriter"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,
@@ -104,14 +104,14 @@ class MoviesInformationBox extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "Elenco Principal: ",
+                                  "Ilustração: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
                                 Expanded(
                                   child: Text(
-                                    snapshot.data["cast"],
+                                    snapshot.data["comicArtist"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                   ),
@@ -144,14 +144,14 @@ class MoviesInformationBox extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "Sinopse: ",
+                                  "Resumo: ",
                                   style: BatFonts.createTitle(
                                       color: Colors.black,
                                       fontSize: BatFonts.t2),
                                 ),
                                 Expanded(
                                   child: Text(
-                                    snapshot.data["synopsis"],
+                                    snapshot.data["resume"],
                                     style: BatFonts.createParagraph(
                                         color: Colors.black),
                                     textAlign: TextAlign.justify,
